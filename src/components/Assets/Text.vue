@@ -2,7 +2,7 @@
   <i
     v-if="textType == 'i'"
     :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign:textAlign}"
-    :class="{ mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    :class="{ mobileFontSize14: mobileFontSize14, mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
     style="word-break: keep-all"
   >
     <slot />
@@ -10,7 +10,7 @@
   <span
     v-else
     :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign: textAlign}"
-    :class="{ mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    :class="{  mobileFontSize14: mobileFontSize14,mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
     style="word-break: keep-all"
   >
     <slot />
@@ -57,6 +57,9 @@ export default {
       type: String,
       default: "NanumSquareEB"
     },
+    mobileFontSize14: {
+      type: Boolean
+    },
     mobileFontSize20: {
       type: Boolean
     },
@@ -74,6 +77,9 @@ export default {
   }
   .mobileFontSize30 {
     font-size: 30px !important;
+  }
+  .mobileFontSize14 {
+    font-size: 14px !important;
   }
 }
 </style>

@@ -56,4 +56,13 @@ body {
 #app {
   margin: 0 auto;
 }
+
+::-webkit-scrollbar {
+  background: white;
+  width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #102765;
+}
 </style>

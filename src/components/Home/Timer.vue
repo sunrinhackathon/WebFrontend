@@ -8,6 +8,7 @@
         margin="0 auto"
         justifyContent="center"
         fontSize="30px"
+        :mobileFontSize="true"
       >{{data.timeName}}</TextComponent>
     </div>
   </div>
@@ -34,5 +35,13 @@ export default {
 }
 .timer > * {
   margin: 0px 26px;
+}
+@media screen and (max-width: 768px) {
+  .timer {
+    font-size: 44px !important;
+  }
+  .timer > * {
+    margin: 0px 10px;
+  }
 }
 </style>

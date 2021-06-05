@@ -1,7 +1,7 @@
 <template>
   <div class="timer">
     <div v-for="data in timeArray" :key="data.timeName">
-      <div>{{data.data}}</div>
+      <div style="color: white; text-align: center">{{data.data}}</div>
       <TextComponent
         textType="i"
         display="flex"
@@ -9,6 +9,7 @@
         justifyContent="center"
         fontSize="30px"
         :mobileFontSize="true"
+        color="white"
       >{{data.timeName}}</TextComponent>
     </div>
   </div>

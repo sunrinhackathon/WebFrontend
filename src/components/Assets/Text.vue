@@ -2,12 +2,14 @@
   <i
     v-if="textType == 'i'"
     :style="{fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign:textAlign}"
+    :class="mobileFontSize? 'mobileFontSize':''"
   >
     <slot />
   </i>
   <span
     v-else
     :style="{fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign: textAlign}"
+    :class="mobileFontSize? 'mobileFontSize':''"
   >
     <slot />
   </span>
@@ -48,10 +50,18 @@ export default {
     fontFamily: {
       type: String,
       default: "NanumSquareEB"
+    },
+    mobileFontSize: {
+      type: Boolean
     }
   }
 };
 </script>
 
 <style scoped>
+@media screen and (max-width: 768px) {
+  .mobileFontSize {
+    font-size: 20px !important;
+  }
+}
 </style>

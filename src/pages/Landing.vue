@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <ModalComponent v-if="showModal" @close="showModal = false"></ModalComponent>
     <section class="home__banner">
       <div class="home__banner__images">
         <img src="@/assets/images/developer.svg" class="home__banner__image__developer" />
@@ -8,7 +9,7 @@
       </div>
       <img src="@/assets/images/timer.svg" alt="선린톤 타이머 이미지" class="home__banner__timer" />
       <TimerComponent :timeArray="time"></TimerComponent>
-      <button class="home__banner__button">예선 지원하러 가기</button>
+      <button class="home__banner__button" @click="showModal = true">예선 지원하러 가기</button>
     </section>
     <div class="home__banner__background">
       <div class="home__banner__bottom"></div>
@@ -115,9 +116,11 @@
 
 <script>
 import TimerComponent from "@/components/Home/Timer";
+import ModalComponent from "@/components/Home/Modal";
+
 export default {
   name: "Home",
-  components: { TimerComponent },
+  components: { TimerComponent, ModalComponent },
   data() {
     return {
       time: [
@@ -125,7 +128,8 @@ export default {
         { timeName: "hours", data: "23" },
         { timeName: "min", data: "45" },
         { timeName: "sec", data: "67" }
-      ]
+      ],
+      showModal: false
     };
   }
 };
@@ -146,7 +150,8 @@ export default {
 }
 .home__banner__timer {
   width: 200px;
-  margin-top: -100px;
+  margin-top: -80px;
+  margin-bottom: 20px;
 }
 .home__banner {
   width: 100%;
@@ -199,6 +204,7 @@ export default {
   font-size: 25px;
   margin-top: 80px;
   background-color: white;
+  cursor: pointer;
 }
 .home__banner__bottom {
   height: 80px;

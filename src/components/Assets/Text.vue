@@ -1,15 +1,17 @@
 <template>
   <i
     v-if="textType == 'i'"
-    :style="{fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign:textAlign}"
-    :class="mobileFontSize? 'mobileFontSize':''"
+    :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign:textAlign}"
+    :class="{ mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    style="word-break: keep-all"
   >
     <slot />
   </i>
   <span
     v-else
-    :style="{fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign: textAlign}"
-    :class="mobileFontSize? 'mobileFontSize':''"
+    :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign: textAlign}"
+    :class="{ mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    style="word-break: keep-all"
   >
     <slot />
   </span>
@@ -19,6 +21,10 @@
 export default {
   name: "TextComponent",
   props: {
+    color: {
+      type: String,
+      default: "#102765"
+    },
     margin: {
       type: String,
       default: "0"
@@ -51,7 +57,10 @@ export default {
       type: String,
       default: "NanumSquareEB"
     },
-    mobileFontSize: {
+    mobileFontSize20: {
+      type: Boolean
+    },
+    mobileFontSize30: {
       type: Boolean
     }
   }
@@ -60,8 +69,11 @@ export default {
 
 <style scoped>
 @media screen and (max-width: 768px) {
-  .mobileFontSize {
+  .mobileFontSize20 {
     font-size: 20px !important;
+  }
+  .mobileFontSize30 {
+    font-size: 30px !important;
   }
 }
 </style>

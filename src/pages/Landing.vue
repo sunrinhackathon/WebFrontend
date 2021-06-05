@@ -138,7 +138,7 @@ export default {
 <style scoped>
 .home__banner__images {
   width: 100%;
-  margin: 0px 0px 70px 0px;
+  margin: 40px 0px 70px 0px;
   display: flex;
   justify-content: center;
   align-items: center;

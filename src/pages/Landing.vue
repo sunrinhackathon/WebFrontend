@@ -117,20 +117,59 @@
 <script>
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: "https://api.hackathon.sunrin.hadmarine.com/v1"
+});
+
+const getTime=async ()=>{
+  return await api.get("/time/start/hackathon").then(res=>{
+    if(res.status===500){
+      alert(res.message);
+    }
+    return res.data.data;
+  }).catch(e=>{
+    console.error(e);
+    throw e;
+  })
+}
 
 export default {
   name: "Home",
   components: { TimerComponent, ModalComponent },
-  data() {
+data() {
     return {
-      time: [
-        { timeName: "days", data: "01" },
-        { timeName: "hours", data: "23" },
-        { timeName: "min", data: "45" },
-        { timeName: "sec", data: "67" }
-      ],
+      time: null,
       showModal: false
     };
+  },
+  created(){
+    getTime().then(res=>{
+      // [
+      //   // { timeName: "days", data: "01" },
+      //   // { timeName: "hours", data: "23" },
+      //   // { timeName: "min", data: "45" },
+      //   // { timeName: "sec", data: "67" }
+      // ]
+      var timer=new Date(res);
+
+      this.time=[
+        {
+          timeName:'days',
+          data:timer.getDay()
+        },{
+          timeName:'hours',
+          data:timer.getHours()
+        },{
+          timeName:'min',
+          data:timer.getMinutes()
+        },{
+          timeName:'sec',
+          data:timer.getSeconds()
+        }
+      ];
+    });
   }
 };
 </script>
@@ -166,7 +205,7 @@ export default {
 
 .home__banner__background {
   width: 100%;
-  height: 200px;
+  height: 250px;
   background-color: #113fbd;
   position: relative;
 }
@@ -202,9 +241,14 @@ export default {
   border: 0px;
   box-shadow: #0613aa 10px 10px 3px;
   font-size: 25px;
-  margin-top: 80px;
+  /* margin-top: 80px; */
   background-color: white;
   cursor: pointer;
+  z-index: 1;
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom:-120px;
 }
 .home__banner__bottom {
   height: 80px;

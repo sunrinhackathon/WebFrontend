@@ -3,6 +3,9 @@
     <div class="modal-mask">
       <div class="modal-wrapper"  @click.self="$emit('close')">
         <div class="modal-container">
+        <div class="modal-close" @click="$emit('close')">
+          <img src="@/assets/images/closeblack.svg" alt="closeblock">
+        </div>
           <div class="modal-header">
             <TextComponent
               mobileFontSize20
@@ -19,19 +22,19 @@
           <div class="modal-body">
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 김선린" />
+              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name"/>
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">전화번호</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 010-1234-1234" />
+              <input class="modal-body-input" type="text" placeholder="ex) 010-1234-1234" v-model="phone" />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">팀 이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 선린톤화이팅" />
+              <input class="modal-body-input" type="text" placeholder="ex) 선린톤화이팅" v-model="team" />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">직책</div>
-              <select class="modal-body-input">
+              <select class="modal-body-input" v-model="position">
                 <option value="팀장">팀장</option>
                 <option value="개발자">개발자</option>
                 <option value="디자이너">디자이너</option>
@@ -39,7 +42,7 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">티셔츠 사이즈</div>
-              <select class="modal-body-input">
+              <select class="modal-body-input" v-model="shirtSize">
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
@@ -51,9 +54,10 @@
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
-                <div class="modal-body-input"></div>
+                <div class="modal-body-input ">{{protfolioMessage}}</div>
               </label>
-              <input id="file" style="display:none" type="file" />
+              <input id="file" style="display:none" type="file" accept="application/pdf" @change="setprotfolio"/>
+
             </div>
           </div>
 
@@ -67,7 +71,49 @@
 </template>
 
 <script>
-export default {};
+import api from "@/assets/client";
+export default {
+  data(){
+    return {
+      name: "",
+      phone:"",
+      team:"",
+      position:"",
+      shirtSize:"",
+      protfolioMessage:"미제출상태입니당",
+      protfolio:"",
+    }
+  },
+  methods: {
+    setprotfolio:function(){
+      const file=document.getElementById("file");
+      if(file.files && file.files[0].size>1024 * 1024*50){
+        alert("파일은 50mb이하여야합니다");
+        return;
+      }
+        else if(file.files[0]){
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            this.protfolio=e.target.result;
+        };
+        this.protfolioMessage="제출 완료";
+        reader.readAsDataURL(file.files[0]);
+      }
+    },
+
+    submitapplication:async function(){
+      const formData=new FormData();
+      const result=await api.post("/apply",formData);
+
+      if(result.result){
+        alert("제출완료");
+      }
+      else{
+        alert("제출실패")
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -100,6 +146,14 @@ export default {};
   transition: all 0.3s ease;
   font-family: Helvetica, Arial, sans-serif;
   overflow-y: auto;
+  position: relative;
+}
+.modal-close{
+  position: absolute;
+  right:20px;
+  top:20px;
+  cursor: pointer;
+  height:fit-content;
 }
 .modal-header {
   width: 100%;
@@ -143,13 +197,16 @@ export default {};
 .modal-body-input {
   width: 100%;
   height: 46px;
-
+  outline: none;
   border-radius: 14px;
   border: 2px solid #102765;
   padding: 0px 10px;
 
   font-size: 16px;
   font-family: "NanumSquareR";
+
+  display:flex;
+  align-items: center;
 }
 .modal-body-input-title {
   font-size: 20px;

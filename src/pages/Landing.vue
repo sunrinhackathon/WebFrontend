@@ -117,11 +117,8 @@
 <script>
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "https://api.hackathon.sunrin.hadmarine.com/v1"
-});
+import moment from 'moment';
+import api from "@/assets/client";
 
 const getTime=async ()=>{
   return await api.get("/time/start/hackathon").then(res=>{
@@ -141,35 +138,43 @@ export default {
 data() {
     return {
       time: null,
-      showModal: false
+      showModal: false,
+      endTime: new moment('2021-7-9 1:58:00'),
+      startTime: new moment(),
     };
   },
   created(){
     getTime().then(res=>{
-      // [
-      //   // { timeName: "days", data: "01" },
-      //   // { timeName: "hours", data: "23" },
-      //   // { timeName: "min", data: "45" },
-      //   // { timeName: "sec", data: "67" }
-      // ]
-      var timer=new Date(res);
-
-      this.time=[
-        {
-          timeName:'days',
-          data:timer.getDay()
-        },{
-          timeName:'hours',
-          data:timer.getHours()
-        },{
-          timeName:'min',
-          data:timer.getMinutes()
-        },{
-          timeName:'sec',
-          data:timer.getSeconds()
-        }
-      ];
+      this.endTime =new moment(res);
     });
+    
+
+      var remaintimer=this.endTime-this.startTime;
+
+      setInterval(()=>{
+        var timer=new moment(remaintimer);
+        this.time=[
+          {
+            timeName:'days',
+            data:timer.date()
+          },{
+            timeName:'hours',
+            data:timer.hour()
+          },{
+            timeName:'min',
+            data:timer.minute()
+          },{
+            timeName:'sec',
+            data:timer.second()
+          }
+        ];
+        remaintimer-=1000;
+
+      },1000);
+    
+  },
+  update: function(){
+    
   }
 };
 </script>

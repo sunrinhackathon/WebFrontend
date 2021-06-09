@@ -117,64 +117,64 @@
 <script>
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
-import moment from 'moment';
+import moment from "moment";
 import api from "@/assets/client";
 
-const getTime=async ()=>{
-  return await api.get("/time/start/hackathon").then(res=>{
-    if(res.status===500){
-      alert(res.message);
-    }
-    return res.data.data;
-  }).catch(e=>{
-    console.error(e);
-    throw e;
-  })
-}
+const getTime = async () => {
+  return await api
+    .get("/time/start/hackathon")
+    .then(res => {
+      if (res.status === 500) {
+        alert(res.message);
+      }
+      return res.data.data;
+    })
+    .catch(e => {
+      console.error(e);
+      throw e;
+    });
+};
 
 export default {
   name: "Home",
   components: { TimerComponent, ModalComponent },
-data() {
+  data() {
     return {
       time: null,
       showModal: false,
-      endTime: new moment('2021-7-9 1:58:00'),
-      startTime: new moment(),
+      endTime: new moment("2021-7-9 1:58:00"),
+      startTime: new moment()
     };
   },
-  created(){
-    getTime().then(res=>{
-      this.endTime =new moment(res);
+  created() {
+    getTime().then(res => {
+      // [
+      //   // { timeName: "days", data: "01" },
+      //   // { timeName: "hours", data: "23" },
+      //   // { timeName: "min", data: "45" },
+      //   // { timeName: "sec", data: "67" }
+      // ]
+      var timer = new Date(res);
+
+      this.time = [
+        {
+          timeName: "days",
+          data: timer.getDay()
+        },
+        {
+          timeName: "hours",
+          data: timer.getHours()
+        },
+        {
+          timeName: "min",
+          data: timer.getMinutes()
+        },
+        {
+          timeName: "sec",
+          data: timer.getSeconds()
+        }
+      ];
     });
-    
-
-      var remaintimer=this.endTime-this.startTime;
-
-      setInterval(()=>{
-        var timer=new moment(remaintimer);
-        this.time=[
-          {
-            timeName:'days',
-            data:timer.date()
-          },{
-            timeName:'hours',
-            data:timer.hour()
-          },{
-            timeName:'min',
-            data:timer.minute()
-          },{
-            timeName:'sec',
-            data:timer.second()
-          }
-        ];
-        remaintimer-=1000;
-
-      },1000);
-    
-  },
-  update: function(){
-    
   }
 };
 </script>
@@ -250,10 +250,10 @@ data() {
   background-color: white;
   cursor: pointer;
   z-index: 1;
-  position:absolute;
-  left:50%;
+  position: absolute;
+  left: 50%;
   transform: translateX(-50%);
-  bottom:-120px;
+  bottom: -120px;
 }
 .home__banner__bottom {
   height: 80px;

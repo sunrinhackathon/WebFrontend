@@ -117,12 +117,8 @@
 <script>
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
-import moment from 'moment';
+import moment from "moment";
 import api from "@/assets/client";
-
-const api = axios.create({
-  baseURL: "https://api.hackathon.sunrin.hadmarine.com/v1"
-});
 
 const getTime = async () => {
   return await api
@@ -146,8 +142,8 @@ export default {
     return {
       time: null,
       showModal: false,
-      endTime: new moment('2021-7-9 1:58:00'),
-      startTime: new moment(),
+      endTime: new moment("2021-7-9 1:58:00"),
+      startTime: new moment()
     };
   },
   created() {

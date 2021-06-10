@@ -1,11 +1,11 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <div class="modal-wrapper"  @click.self="$emit('close')">
+      <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
-        <div class="modal-close" @click="$emit('close')">
-          <img src="@/assets/images/closeblack.svg" alt="closeblock">
-        </div>
+          <div class="modal-close" @click="$emit('close')">
+            <img src="@/assets/images/closeblack.svg" alt="closeblock" />
+          </div>
           <div class="modal-header">
             <TextComponent
               mobileFontSize20
@@ -22,7 +22,7 @@
           <div class="modal-body">
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name"/>
+              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name" />
             </div>
              <div class="modal-body-input-box">
               <div class="modal-body-input-title">학번</div>
@@ -30,7 +30,12 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">전화번호</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 010-1234-1234" v-model="phone" />
+              <input
+                class="modal-body-input"
+                type="text"
+                placeholder="ex) 010-1234-1234"
+                v-model="phone"
+              />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">팀 이름</div>
@@ -58,7 +63,7 @@
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
-                <div class="modal-body-input ">{{protfolioMessage}}</div>
+                <div class="modal-body-input">{{protfolioMessage}}</div>
               </label>
               <input id="file" style="display:none" type="file" accept="application/pdf" @change="setprotfolio($event)"/>
 
@@ -77,7 +82,7 @@
 <script>
 import api from "@/assets/client";
 export default {
-  data(){
+  data() {
     return {
       name: "",
       phone:"",
@@ -169,12 +174,12 @@ export default {
   overflow-y: auto;
   position: relative;
 }
-.modal-close{
+.modal-close {
   position: absolute;
-  right:20px;
-  top:20px;
+  right: 20px;
+  top: 20px;
   cursor: pointer;
-  height:fit-content;
+  height: fit-content;
 }
 .modal-header {
   width: 100%;
@@ -227,7 +232,7 @@ export default {
   font-size: 16px;
   font-family: "NanumSquareR";
 
-  display:flex;
+  display: flex;
   align-items: center;
 }
 .modal-body-input-title {

@@ -154,6 +154,7 @@ export default {
       //   // { timeName: "min", data: "45" },
       //   // { timeName: "sec", data: "67" }
       // ]
+      console.log(res);
       var timer = new Date(res);
 
       this.time = [

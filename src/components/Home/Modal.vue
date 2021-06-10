@@ -24,6 +24,10 @@
               <div class="modal-body-input-title">이름</div>
               <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name"/>
             </div>
+             <div class="modal-body-input-box">
+              <div class="modal-body-input-title">학번</div>
+              <input class="modal-body-input" type="text" placeholder="ex) 30512" v-model="studentId"/>
+            </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">전화번호</div>
               <input class="modal-body-input" type="text" placeholder="ex) 010-1234-1234" v-model="phone" />
@@ -42,7 +46,7 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">티셔츠 사이즈</div>
-              <select class="modal-body-input" v-model="shirtSize">
+              <select class="modal-body-input" v-model="clothSize">
                 <option value="S">S</option>
                 <option value="M">M</option>
                 <option value="L">L</option>
@@ -56,7 +60,7 @@
               <label for="file">
                 <div class="modal-body-input ">{{protfolioMessage}}</div>
               </label>
-              <input id="file" style="display:none" type="file" accept="application/pdf" @change="setprotfolio"/>
+              <input id="file" style="display:none" type="file" accept="application/pdf" @change="setprotfolio($event)"/>
 
             </div>
           </div>
@@ -78,41 +82,56 @@ export default {
       name: "",
       phone:"",
       team:"",
+      studentId:"",
       position:"",
-      shirtSize:"",
+      clothSize:"",
       protfolioMessage:"미제출상태입니다",
-      protfolio:"",
+      formData:new FormData(),
     }
   },
   methods: {
-    setprotfolio:function(){
-      const file=document.getElementById("file");
+    setprotfolio:function(event){
+      const file = event.target.files[0];
       if(file.files && file.files[0].size>1024 * 1024*50){
         alert("파일은 50mb이하여야합니다");
         return;
       }
-        else if(file.files[0]){
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            this.protfolio=e.target.result;
-        };
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        this.protfolio = event.target.result;
+       };
         this.protfolioMessage="제출 완료";
-        reader.readAsDataURL(file.files[0]);
-      }
+      // const file=document.getElementById("file");
+      // if(file.files[0]){
+      //     
+      //     reader.onload = function (e) {
+      //       this.protfolio=reader.result;
+      //     };  
+        
+      //   reader.readAsDataURL(file.files[0]);
+      // }
     },
 
     submitapplication:async function(){
-      const formData=new FormData();
-      // const result=await api.post("/apply",formData);
+      this.formData.set("name",this.name);
+      // this.formData.set("phone",this.phone);
+      this.formData.set("studentId",this.studentId);
+      this.formData.set("teamName",this.team);
+      this.formData.set("position",this.position);
+      this.formData.set("clothSize",this.clothSize);
+      this.formData.set("protfolio",this.protfolio);
 
-      // if(result.result){
-      //   alert("제출완료");
-      // }
-      // else{
-      //   alert("제출실패")
-      // }
-      // $emit('close');
-      console.log(this.position,this.shirtSize,this.protfolio) 
+
+      for (var pair of this.formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+      const result=await api.post("/apply",this.formData);
+
+      if(result.result){
+        alert("제출완료");
+      }
+      else{
+        alert("제출실패")
+      }
     }
   }
 };
@@ -189,6 +208,7 @@ export default {
   font-family: "NanumSquareEB";
   border: 0px;
   cursor: pointer;
+  outline: none;
 }
 .modal-body-input-box {
   width: 80%;

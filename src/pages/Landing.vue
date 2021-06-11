@@ -195,7 +195,6 @@ export default {
 .home__banner__timer {
   width: 200px;
   margin-top: -80px;
-  margin-bottom: 20px;
 }
 .home__banner {
   width: 100%;

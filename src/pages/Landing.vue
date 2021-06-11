@@ -148,34 +148,33 @@ export default {
   },
   created() {
     getTime().then(res => {
-      // [
-      //   // { timeName: "days", data: "01" },
-      //   // { timeName: "hours", data: "23" },
-      //   // { timeName: "min", data: "45" },
-      //   // { timeName: "sec", data: "67" }
-      // ]
-      console.log(res);
-      var timer = new Date(res);
+      this.endTime = new moment(res);
+    });
 
+    var remaintimer = this.endTime - this.startTime;
+
+    setInterval(() => {
+      var timer = new moment(remaintimer);
       this.time = [
         {
           timeName: "days",
-          data: timer.getDay()
+          data: timer.date()
         },
         {
           timeName: "hours",
-          data: timer.getHours()
+          data: timer.hour()
         },
         {
           timeName: "min",
-          data: timer.getMinutes()
+          data: timer.minute()
         },
         {
           timeName: "sec",
-          data: timer.getSeconds()
+          data: timer.second()
         }
       ];
-    });
+      remaintimer -= 1000;
+    }, 1000);
   }
 };
 </script>

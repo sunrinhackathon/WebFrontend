@@ -67,7 +67,7 @@ jobs:
           name: AWS S3 Deployment - Syncing
           command: aws s3 sync $SRC_FOLDER $S3_URL --delete
           environment:
-            SRC_FOLDER: build
+            SRC_FOLDER: dist
             S3_URL: s3://2021-sunrinthon-main-page-production
       - run:
           name: AWS Cloudfront - Invalidation
@@ -114,8 +114,8 @@ jobs:
           name: AWS S3 Deployment - Syncing
           command: aws s3 sync $SRC_FOLDER $S3_URL --delete
           environment:
-            SRC_FOLDER: build
-            S3_URL: s3://interbrid-channeltune-webapp-development
+            SRC_FOLDER: dist
+            S3_URL: s3://2021-sunrinthon-main-page-development
       - run:
           name: Webhook on FAIL
           command: |

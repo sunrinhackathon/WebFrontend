@@ -1,0 +1,148 @@
+version: 2.1
+orbs:
+  node: circleci/node@1.1.6
+jobs:
+  test:
+    docker:
+      - image: playauto/circleci-node10-awscli
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - root-fb2-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Dependencies package installation
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: root-fb2-dependencies-{{ checksum "package.json" }}
+      # - run:
+      #     name: Set Environment Variables
+      #     command: npm run dec:env
+      # - run:
+      #     name: Testing
+      #     command: npm run test-auto
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: Webhook on FAIL
+          command: |
+            echo FAIL
+            exit 1
+          when: on_fail
+      - run:
+          name: Webhook on SUCCESS
+          command: |
+            echo SUCCESS
+            exit 0
+  deploy-prod:
+    docker:
+      - image: playauto/circleci-node10-awscli
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - root-fb2-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Dependencies package installation
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: root-fb2-dependencies-{{ checksum "package.json" }}
+      # - run:
+      #     name: Set Environment Variables
+      #     command: npm run dec:env
+      # - run:
+      #     name: Testing
+      #     command: npm run test-auto
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: AWS S3 Deployment - Syncing
+          command: aws s3 sync $SRC_FOLDER $S3_URL --delete
+          environment:
+            SRC_FOLDER: dist
+            S3_URL: s3://2021-sunrinthon-main-page-production
+      - run:
+          name: AWS Cloudfront - Invalidation
+          command: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+          environment:
+            CF_DIST_ID: E381A3C8NQLA92
+      - run:
+          name: Webhook on FAIL
+          command: |
+            echo FAIL
+            exit 1
+          when: on_fail
+      - run:
+          name: Webhook on SUCCESS
+          command: |
+            echo SUCCESS
+            exit 0
+  deploy-dev:
+    docker:
+      - image: playauto/circleci-node10-awscli
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - root-fb2-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Dependencies package installation
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: root-fb2-dependencies-{{ checksum "package.json" }}
+      # - run:
+      #     name: Set Environment Variables
+      #     command: npm run dec:env
+      # - run:
+      #     name: Testing
+      #     command: npm run test-auto
+      - run:
+          name: Build
+          command: npm run build
+      - run:
+          name: AWS S3 Deployment - Syncing
+          command: aws s3 sync $SRC_FOLDER $S3_URL --delete
+          environment:
+            SRC_FOLDER: dist
+            S3_URL: s3://2021-sunrinthon-main-page-development
+      - run:
+          name: Webhook on FAIL
+          command: |
+            echo FAIL
+            exit 1
+          when: on_fail
+      - run:
+          name: Webhook on SUCCESS
+          command: |
+            echo SUCCESS
+            exit 0
+workflows:
+  test-build-deployment:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore:
+                - master
+                - develop
+      - deploy-prod:
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-dev:
+          filters:
+            branches:
+              only:
+                - develop

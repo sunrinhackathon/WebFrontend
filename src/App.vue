@@ -11,6 +11,11 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "KoolBeans";
+  src: url("./assets/fonts/KoolBeans.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
   font-family: "NanumSquareR";
   src: url("./assets/fonts/NanumSquareR.ttf") format("truetype");
   font-display: swap;

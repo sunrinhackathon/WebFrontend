@@ -2,7 +2,7 @@ import axios from "axios";
 // import client from "eqb-request-client";
 
 const api = axios.create({
-  baseURL: "https://api.hackathon.sunrin.hadmarine.com/v1",
+  baseURL: "https://dev.api.hackathon.sunrin.dev/v1",
 });
 
 export default api;

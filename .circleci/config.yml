@@ -73,7 +73,7 @@ jobs:
           name: AWS Cloudfront - Invalidation
           command: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
           environment:
-            CF_DIST_ID: E381A3C8NQLA92
+            CF_DIST_ID: E36FP7GEJIG8FM
       - run:
           name: Webhook on FAIL
           command: |

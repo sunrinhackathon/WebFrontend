@@ -115,7 +115,7 @@ export default {
       position: "",
       clothSize: "",
       protfolioMessage: "파일 찾아보기...",
-      formData: new FormData(),
+      formData: new FormData()
     };
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
       }
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = (event) => {
+      reader.onload = event => {
         this.protfolio = event.target.result;
       };
       this.protfolioMessage = "제출 완료";
@@ -161,8 +161,8 @@ export default {
       } else {
         alert("제출실패");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -177,8 +177,18 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
   transition: opacity 0.3s ease;
+  animation: load 1s;
 }
-
+@keyframes load {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;

@@ -139,16 +139,18 @@
           >선린 해커톤 페이스북 페이지 ( @sunrinhackathon )</TextComponent
         >
         <!-- 이미지 박스 -->
-        <img
-          src="@/assets/images/facebook.svg"
-          alt="facebook image"
-          width="180px"
-          height="160px"
-          style="width:100%; margin :0 auto"
-        />
-        <TextComponent margin="-20px 0px 36px 0px"
-          >▲ 선린톤 페이스북 페이지</TextComponent
-        >
+        <a href="http://facebook.com/sunrinhackathon">
+          <img
+            src="@/assets/images/facebook.svg"
+            alt="facebook image"
+            width="180px"
+            height="160px"
+            style="width:100%; margin :0 auto"
+          />
+          <TextComponent margin="-20px 0px 36px 0px"
+            >▲ 선린톤 페이스북 페이지</TextComponent
+          >
+        </a>
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30
@@ -175,7 +177,7 @@
         >
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30
+        <TextComponent fontSize="36px" mobileFontSize30F
           >포인트 교환소</TextComponent
         >
         <TextComponent
@@ -196,6 +198,7 @@ import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
 import moment from "moment";
 import api from "@/assets/client";
+
 const settingTimer = async () => {
   return await api
     .post("/admin/time/start/hackathon", {
@@ -382,5 +385,8 @@ export default {
     height: 66px;
     font-size: 20px;
   }
+}
+a {
+  text-decoration: none;
 }
 </style>

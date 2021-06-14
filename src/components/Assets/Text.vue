@@ -1,16 +1,42 @@
 <template>
   <i
     v-if="textType == 'i'"
-    :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign:textAlign}"
-    :class="{ mobileFontSize14: mobileFontSize14, mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    :style="{
+      color: color,
+      fontSize: fontSize,
+      display: displayType,
+      margin: margin,
+      justifyContent: justifyContent,
+      alignItems: alignItems,
+      fontFamily: fontFamily,
+      textAlign: textAlign
+    }"
+    :class="{
+      mobileFontSize14: mobileFontSize14,
+      mobileFontSize20: mobileFontSize20,
+      mobileFontSize30: mobileFontSize30
+    }"
     style="word-break: keep-all"
   >
     <slot />
   </i>
   <span
     v-else
-    :style="{color:color,fontSize: fontSize, display: displayType, margin: margin, justifyContent:justifyContent, alignItems:alignItems, fontFamily:fontFamily, textAlign: textAlign}"
-    :class="{  mobileFontSize14: mobileFontSize14,mobileFontSize20: mobileFontSize20, mobileFontSize30: mobileFontSize30 }"
+    :style="{
+      color: color,
+      fontSize: fontSize,
+      display: displayType,
+      margin: margin,
+      justifyContent: justifyContent,
+      alignItems: alignItems,
+      fontFamily: fontFamily,
+      textAlign: textAlign
+    }"
+    :class="{
+      mobileFontSize14: mobileFontSize14,
+      mobileFontSize20: mobileFontSize20,
+      mobileFontSize30: mobileFontSize30
+    }"
     style="word-break: keep-all"
   >
     <slot />

@@ -1,5 +1,12 @@
 <template>
-  <div :style="{width: width, height: height, backgroundColor: backgroundColor, margin:margin}"></div>
+  <div
+    :style="{
+      width: width,
+      height: height,
+      backgroundColor: backgroundColor,
+      margin: margin
+    }"
+  ></div>
 </template>
 
 <script>

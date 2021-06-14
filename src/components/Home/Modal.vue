@@ -177,7 +177,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
   display: table;
   transition: opacity 0.3s ease;
-  animation: load 1s;
+  animation: load 0.5s;
 }
 @keyframes load {
   0% {

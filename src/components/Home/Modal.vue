@@ -87,7 +87,7 @@
                 style="display:none"
                 type="file"
                 accept="application/pdf"
-                @change="setprotfolio($event)"
+                @change="setportfolios($event)"
               />
             </div>
           </div>
@@ -115,52 +115,49 @@ export default {
       position: "",
       clothSize: "",
       protfolioMessage: "파일 찾아보기...",
-      formData: new FormData()
+      formData: new FormData(),
+      portfolio: null
     };
   },
   methods: {
-    setprotfolio: function(event) {
+    setportfolios(event) {
       const file = event.target.files[0];
-      if (file.files && file.files[0].size > 1024 * 1024 * 50) {
+      if (!file || file.size > 1024 * 1024 * 50) {
         alert("파일은 50mb이하여야합니다");
         return;
       }
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      // console.log(file);
       reader.onload = event => {
-        this.protfolio = event.target.result;
+        // console.log("성공", event.target.result);
+        this.protfolioMessage = "제출완료";
       };
-      this.protfolioMessage = "제출 완료";
-      // const file=document.getElementById("file");
-      // if(file.files[0]){
-      //
-      //     reader.onload = function (e) {
-      //       this.protfolio=reader.result;
-      //     };
-
-      //   reader.readAsDataURL(file.files[0]);
-      // }
+      reader.readAsDataURL(file);
+      this.portfolio = file;
+      // console.log(this.portfolio);
     },
 
     submitapplication: async function() {
       this.formData.set("name", this.name);
-      // this.formData.set("phone",this.phone);
-      this.formData.set("studentId", this.studentId);
-      this.formData.set("teamName", this.team);
+      this.formData.set("phonenumber", this.phone);
+      this.formData.set("studentid", this.studentId);
+      this.formData.set("teamname", this.team);
       this.formData.set("position", this.position);
-      this.formData.set("clothSize", this.clothSize);
-      this.formData.set("protfolio", this.protfolio);
+      this.formData.set("clothsize", this.clothSize);
+      this.formData.set("portfolio", this.portfolio);
 
-      for (var pair of this.formData.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
-      const result = await api.post("/apply", this.formData);
-
-      if (result.result) {
-        alert("제출완료");
-      } else {
-        alert("제출실패");
-      }
+      // for (var pair of this.formData.entries()) {
+      //   console.log(pair[0] + ", " + pair[1]);
+      // }
+      await api
+        .post("/apply", this.formData)
+        .then(res => {
+          console.log(res);
+        })
+        .catch(e => {
+          console.log(e);
+          throw e;
+        });
     }
   }
 };

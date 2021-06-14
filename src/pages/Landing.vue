@@ -259,6 +259,7 @@ export default {
   font-family: "NanumSquareEB";
   width: 263px;
   height: 80px;
+  min-height: 80px;
   border-radius: 75px;
   border: 0px;
   box-shadow: #0613aa 10px 10px 3px;

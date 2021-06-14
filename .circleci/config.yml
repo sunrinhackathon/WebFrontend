@@ -68,7 +68,7 @@ jobs:
           command: aws s3 sync $SRC_FOLDER $S3_URL --delete
           environment:
             SRC_FOLDER: dist
-            S3_URL: s3://2021-sunrinthon-main-page-production
+            S3_URL: s3://sunrinthon-production-website
       - run:
           name: AWS Cloudfront - Invalidation
           command: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
@@ -115,7 +115,7 @@ jobs:
           command: aws s3 sync $SRC_FOLDER $S3_URL --delete
           environment:
             SRC_FOLDER: dist
-            S3_URL: s3://2021-sunrinthon-main-page-development
+            S3_URL: s3://sunrinthon-development-website
       - run:
           name: Webhook on FAIL
           command: |

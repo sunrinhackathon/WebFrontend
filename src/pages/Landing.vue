@@ -374,21 +374,13 @@ export default {
   background-color: #113fbd;
 }
 
-/* .timer__front {
-  color: white;
-  z-index: 100;
-  font-size: 36px;
-  font-family: "KoolBeans";
-  margin-bottom: -80px;
-  display: flex;
-} */
+
 
 .timer__back {
   color:transparent;
   font-family: "KoolBeans";
-  font-size: 40px;
-  /* box-shadow: 5 5 1 1 #001da3; */
-  text-shadow: 1px 13px #001da3;
+  font-size: 58px;
+  text-shadow: 1px 54px #001da3;
 }
 
 @media screen and (max-width: 768px) {
@@ -402,6 +394,10 @@ export default {
     width: 240px;
     height: 66px;
     font-size: 20px;
+  }
+  .timer__back {
+    font-size: 40px;
+    text-shadow: 1px 13px #001da3;
   }
 }
 a {

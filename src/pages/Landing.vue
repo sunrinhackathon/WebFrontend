@@ -292,7 +292,7 @@ export default {
 
 .home__footer {
   width: 100%;
-  height: 240px;
+  height: 180px;
   background-color: #113fbd;
 }
 

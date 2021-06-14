@@ -18,12 +18,6 @@ jobs:
           paths:
             - node_modules
           key: root-fb2-dependencies-{{ checksum "package.json" }}
-      # - run:
-      #     name: Set Environment Variables
-      #     command: npm run dec:env
-      # - run:
-      #     name: Testing
-      #     command: npm run test-auto
       - run:
           name: Build
           command: npm run build
@@ -54,12 +48,6 @@ jobs:
           paths:
             - node_modules
           key: root-fb2-dependencies-{{ checksum "package.json" }}
-      # - run:
-      #     name: Set Environment Variables
-      #     command: npm run dec:env
-      # - run:
-      #     name: Testing
-      #     command: npm run test-auto
       - run:
           name: Build
           command: npm run build
@@ -73,7 +61,7 @@ jobs:
           name: AWS Cloudfront - Invalidation
           command: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
           environment:
-            CF_DIST_ID: E36FP7GEJIG8FM
+            CF_DIST_ID: E1TKLU7BVQK1BN
       - run:
           name: Webhook on FAIL
           command: |
@@ -101,12 +89,6 @@ jobs:
           paths:
             - node_modules
           key: root-fb2-dependencies-{{ checksum "package.json" }}
-      # - run:
-      #     name: Set Environment Variables
-      #     command: npm run dec:env
-      # - run:
-      #     name: Testing
-      #     command: npm run test-auto
       - run:
           name: Build
           command: npm run build
@@ -116,6 +98,11 @@ jobs:
           environment:
             SRC_FOLDER: dist
             S3_URL: s3://sunrinthon-development-website
+      - run:
+          name: AWS Cloudfront - Invalidation
+          command: aws cloudfront create-invalidation --distribution-id $CF_DIST_ID --paths "/*"
+          environment:
+            CF_DIST_ID: E226QLIV1C3EG2
       - run:
           name: Webhook on FAIL
           command: |

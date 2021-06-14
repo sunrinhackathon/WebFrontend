@@ -53,7 +53,7 @@
       <section>
         <TextComponent fontSize="36px" mobileFontSize30>온라인 진행</TextComponent>
         <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
-          이번 해커톤 역시 COVID-19로 인해 온라인으로 진행하게 되었습니다 :(
+          이번 해커톤 역시 COVID-19로 인해 온라인으로 진행하게 되었습니다 :)
           <br />대회 진행 및 운영은 마찬가지로 Discord로 진행할 예정이니
           <br />신청자 분들께서는 디스코드 아이디를 미리 준비해주세요!
         </TextComponent>
@@ -111,7 +111,7 @@
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >예선 이후 공지 예정입니다 :)</TextComponent>
+        >대회 시작 이후 공지 예정입니다 :)</TextComponent>
       </section>
     </article>
     <footer class="home__footer"></footer>

@@ -124,12 +124,12 @@ export default {
 
     submitapplication: async function() {
       this.formData.set("name", this.name);
-      this.formData.set("studentid", this.studentId);
-      this.formData.set("teamname", this.team);
+      this.formData.set("studentId", this.studentId);
+      this.formData.set("teamName", this.team);
       this.formData.set("position", this.position);
-      this.formData.set("clothsize", this.clothSize);
+      this.formData.set("clothSize", this.clothSize);
       this.formData.set("portfolio", this.portfolio);
-      this.formData.set("phonenumber", this.phone);
+      this.formData.set("phoneNumber", this.phone);
 
       // for (var pair of this.formData.entries()) {
       //   console.log(pair[0] + ", " + pair[1]);

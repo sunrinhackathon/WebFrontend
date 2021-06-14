@@ -8,9 +8,6 @@
     </pattern>
   </defs>
   <g id="Timer.psd" transform="translate(-0.415 -0.432)">
-    <g id="그룹_47" data-name="그룹 47" transform="translate(0.415 0.432)" clip-path="url(#clip-path)">
-      <text id="Timer" transform="translate(49.442 72.158)" fill="#0610aa" font-size="68" font-family="KoolBeans, Kool Beans"><tspan x="0" y="0">Timer</tspan></text>
-    </g>
     <g id="그룹_48" data-name="그룹 48" transform="translate(0.415 0.432)" clip-path="url(#clip-path)">
       <rect id="Timer-2" data-name="Timer" width="153" height="51" transform="translate(44 18)" fill="url(#pattern)"/>
     </g>

@@ -20,6 +20,7 @@
           class="home__banner__image__designer"
         />
       </div>
+      <p class="timer__back">Timer</p>
       <img
         src="@/assets/images/timer.svg"
         alt="선린톤 타이머 이미지"
@@ -371,6 +372,23 @@ export default {
   width: 100%;
   height: 240px;
   background-color: #113fbd;
+}
+
+/* .timer__front {
+  color: white;
+  z-index: 100;
+  font-size: 36px;
+  font-family: "KoolBeans";
+  margin-bottom: -80px;
+  display: flex;
+} */
+
+.timer__back {
+  color:transparent;
+  font-family: "KoolBeans";
+  font-size: 40px;
+  /* box-shadow: 5 5 1 1 #001da3; */
+  text-shadow: 1px 13px #001da3;
 }
 
 @media screen and (max-width: 768px) {

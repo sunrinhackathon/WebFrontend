@@ -68,7 +68,7 @@
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
-                <div class="modal-body-input">{{ protfolioMessage }}</div>
+                <div class="modal-body-input">{{ portfolioMessage }}</div>
               </label>
               <input
                 id="file"
@@ -100,7 +100,7 @@ export default {
       studentId: "",
       position: "",
       clothSize: "",
-      protfolioMessage: "파일 업로드",
+      portfolioMessage: "파일 업로드",
       formData: new FormData()
     };
   },
@@ -115,10 +115,10 @@ export default {
       // console.log(file);
       reader.onload = event => {
         // console.log("성공", event.target.result);
-        this.protfolioMessage = file.name;
+        this.portfolioMessage = file.name;
       };
       reader.readAsDataURL(file);
-      this.protfolio = file;
+      this.portfolio = file;
       // console.log(this.portfolio);
     },
 
@@ -128,7 +128,7 @@ export default {
       this.formData.set("teamname", this.team);
       this.formData.set("position", this.position);
       this.formData.set("clothsize", this.clothSize);
-      this.formData.set("protfolio", this.protfolio);
+      this.formData.set("portfolio", this.portfolio);
       this.formData.set("phonenumber", this.phone);
 
       // for (var pair of this.formData.entries()) {

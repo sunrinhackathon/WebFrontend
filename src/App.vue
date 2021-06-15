@@ -57,6 +57,7 @@
 body {
   margin: 0 auto;
   padding: 0;
+  overflow-x: hidden;
 }
 #app {
   margin: 0 auto;

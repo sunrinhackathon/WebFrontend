@@ -11,18 +11,25 @@
               mobileFontSize20
               fontSize="30px"
               margin="0px 0px 8px 0px"
-            >7th 선린 해커톤 예선 신청서</TextComponent>
+              >7th 선린 해커톤 예선 신청서</TextComponent
+            >
             <TextComponent
               mobileFontSize14
               fontSize="18px"
               fontFamily="NanumSquareR"
-            >7월 9일 23:59분까지 작성 부탁 드립니다 :)</TextComponent>
+              >7월 9일 23:59분까지 작성 부탁 드립니다 :)</TextComponent
+            >
           </div>
 
           <div class="modal-body">
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name" />
+              <input
+                class="modal-body-input"
+                type="text"
+                placeholder="ex) 김선린"
+                v-model="name"
+              />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">학번</div>
@@ -44,7 +51,12 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">팀 이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 선린톤화이팅" v-model="team" />
+              <input
+                class="modal-body-input"
+                type="text"
+                placeholder="ex) 선린톤화이팅"
+                v-model="team"
+              />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">직책</div>
@@ -68,20 +80,22 @@
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
-                <div class="modal-body-input">{{ portfolioMessage }}</div>
+                <div class="modal-body-input">{{ protfolioMessage }}</div>
               </label>
               <input
                 id="file"
                 style="display:none"
                 type="file"
                 accept="application/pdf"
-                @change="setportfolios($event)"
+                @change="setprotfolio($event)"
               />
             </div>
           </div>
 
           <div class="modal-footer">
-            <button class="modal-default-button" @click="submitapplication">제출하기</button>
+            <button class="modal-default-button" @click="submitapplication">
+              제출하기
+            </button>
           </div>
         </div>
       </div>
@@ -100,8 +114,9 @@ export default {
       studentId: "",
       position: "",
       clothSize: "",
-      portfolioMessage: "파일 업로드",
-      formData: new FormData()
+      protfolioMessage: "파일 찾아보기...",
+      formData: new FormData(),
+      portfolio: null
     };
   },
   methods: {
@@ -112,10 +127,10 @@ export default {
         return;
       }
       const reader = new FileReader();
-      // console.log(file);
+      console.log(file);
       reader.onload = event => {
-        // console.log("성공", event.target.result);
-        this.portfolioMessage = file.name;
+        console.log("성공", event.target.result);
+        this.protfolioMessage = "제출완료";
       };
       reader.readAsDataURL(file);
       this.portfolio = file;
@@ -123,26 +138,54 @@ export default {
     },
 
     submitapplication: async function() {
-      this.formData.set("name", this.name);
-      this.formData.set("studentid", this.studentId);
-      this.formData.set("teamname", this.team);
-      this.formData.set("position", this.position);
-      this.formData.set("clothsize", this.clothSize);
-      this.formData.set("portfolio", this.portfolio);
-      this.formData.set("phonenumber", this.phone);
+      if (
+        this.name != "" &&
+        this.studentId != "" &&
+        this.team != "" &&
+        this.position != "" &&
+        this.clothSize != "" &&
+        this.portfolio != "" &&
+        this.portfolioMessage != "파일 업로드"
+      ) {
+        this.formData.set("name", this.name);
+        this.formData.set("studentId", this.studentId);
+        this.formData.set("teamName", this.team);
+        this.formData.set("position", this.position);
+        this.formData.set("clothSize", this.clothSize);
+        this.formData.set("portfolio", this.portfolio);
+        this.formData.set("phoneNumber", this.phone);
 
-      // for (var pair of this.formData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1]);
-      // }
-      await api
-        .post("/apply", this.formData)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-          throw e;
-        });
+        // for (var pair of this.formData.entries()) {
+        //   console.log(pair[0] + ", " + pair[1]);
+        // }
+        await api
+          .post("/apply", this.formData)
+          .then(res => {
+            if (res.data.result) {
+              alert("성공적으로 제출하였습니다.");
+              (this.name = ""),
+                (this.phone = ""),
+                (this.team = ""),
+                (this.studentId = ""),
+                (this.position = ""),
+                (this.clothSize = ""),
+                (this.portfolioMessage = "파일 업로드"),
+                (this.formData = new FormData());
+            } else {
+              alert(res.data.message);
+            }
+          })
+          .catch(e => {
+            if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
+              alert("빈칸을 모두 채워주세요.");
+            } else {
+              alert("ERROR");
+            }
+            throw e;
+          });
+      } else {
+        alert("빈칸을 모두 채워주세요.");
+      }
     }
   }
 };
@@ -174,11 +217,12 @@ export default {
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
+  height: 100vh;
 }
 
 .modal-container {
   max-width: 1200px;
-  height: 86%;
+  height: 84%;
   width: 90%;
   margin: 0px auto;
   padding: 3% 30px;
@@ -189,6 +233,11 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
   overflow-y: auto;
   position: relative;
+}
+@media screen and (max-width: 768px) {
+  .modal-container {
+    overflow: hidden;
+  }
 }
 .modal-close {
   position: absolute;

@@ -1,6 +1,8 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
+      <BeatLoader :loading="loading" :color="color" :size="size" class="loading"></BeatLoader>
+
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
           <div class="modal-close" @click="$emit('close')">
@@ -90,18 +92,26 @@
 </template>
 
 <script>
+// import RingLoader from "vue-spinner/src/RingLoader.vue";
+import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 import api from "@/assets/client";
 export default {
+  components: {
+    BeatLoader
+  },
   data() {
     return {
       name: "",
       phone: "",
       team: "",
       studentId: "",
-      position: "",
-      clothSize: "",
+      position: "팀장",
+      clothSize: "L",
       portfolioMessage: "파일 업로드",
-      formData: new FormData()
+      formData: new FormData(),
+      color: "rgb(93, 197, 150)",
+      size: "30px",
+      loading: false
     };
   },
   methods: {
@@ -115,9 +125,8 @@ export default {
       // console.log(file);
       reader.onload = event => {
         // console.log("성공", event.target.result);
-        console.log(file.name);
+        this.portfolioMessage = "";
         this.portfolioMessage = file.name;
-        console.log(this.portfolioMessage);
       };
       reader.readAsDataURL(file);
       this.portfolio = file;
@@ -145,9 +154,11 @@ export default {
         // for (var pair of this.formData.entries()) {
         //   console.log(pair[0] + ", " + pair[1]);
         // }
+        this.loading = true;
         await api
           .post("/apply", this.formData)
           .then(res => {
+            this.loading = false;
             if (res.data.result) {
               alert("성공적으로 제출하였습니다.");
               (this.name = ""),
@@ -163,6 +174,7 @@ export default {
             }
           })
           .catch(e => {
+            this.loading = false;
             if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
               alert("빈칸을 모두 채워주세요.");
             } else {
@@ -179,6 +191,18 @@ export default {
 </script>
 
 <style scoped>
+.loading {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.5);
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -186,7 +210,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   display: table;
   transition: opacity 0.3s ease;
   animation: load 0.5s;

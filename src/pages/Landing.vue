@@ -57,14 +57,16 @@
           <br />대회 진행 및 운영은 마찬가지로 Discord로 진행할 예정이니
           <br />신청자 분들께서는 디스코드 아이디를 미리 준비해주세요!
         </TextComponent>
-        <img
-          src="@/assets/images/discord.svg"
-          alt="discord image"
-          width="150px"
-          height="150px"
-          style="width:100%; margin :0 auto"
-        />
-        <TextComponent margin="-20px 0px 36px 0px">▲ Discord 공식 홈페이지</TextComponent>
+        <a href="https://discord.com">
+          <img
+            src="@/assets/images/discord.svg"
+            alt="discord image"
+            width="150px"
+            height="150px"
+            style="width:100%; margin :0 auto"
+          />
+          <TextComponent margin="-20px 0px 36px 0px">▲ Discord 공식 홈페이지</TextComponent>
+        </a>
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30>문의</TextComponent>
@@ -160,37 +162,42 @@ export default {
     return {
       time: null,
       showModal: false,
-      endTime: new moment("2021-7-9 1:58:00"),
+      endTime: null,
       startTime: new moment()
     };
   },
+  methods: {},
   created() {
     // settingTimer();
     getTime().then(res => {
       console.log(res);
       this.endTime = new moment(res);
-      var remaintimer = this.endTime - this.startTime;
+      var seconds = Number((this.endTime - this.startTime) / 1000);
+
       setInterval(() => {
-        var timer = new moment(remaintimer);
+        var d = Math.floor(seconds / (3600 * 24));
+        var h = Math.floor((seconds % (3600 * 24)) / 3600);
+        var m = Math.floor((seconds % 3600) / 60);
+        var s = Math.floor(seconds % 60);
         this.time = [
           {
             timeName: "days",
-            data: timer.date() < 10 ? "0" + timer.date() : timer.date()
+            data: d < 10 ? "0" + d : d
           },
           {
             timeName: "hours",
-            data: timer.hour() < 10 ? "0" + timer.hour() : timer.hour()
+            data: h < 10 ? "0" + h : h
           },
           {
             timeName: "min",
-            data: timer.minute() < 10 ? "0" + timer.minute() : timer.minute()
+            data: m < 10 ? "0" + m : m
           },
           {
             timeName: "sec",
-            data: timer.second() < 10 ? "0" + timer.second() : timer.second()
+            data: s < 10 ? "0" + s : s
           }
         ];
-        remaintimer -= 1000;
+        seconds -= 1;
       }, 1000);
     });
   }
@@ -268,7 +275,7 @@ export default {
   background-color: white;
   cursor: pointer;
   z-index: 1;
-  margin: 70px auto 0px auto;
+  margin: 50px auto 0px auto;
 }
 .home__banner__bottom {
   height: 80px;
@@ -315,6 +322,7 @@ export default {
   .home__banner__button {
     width: 240px;
     height: 66px;
+    min-height: 66px;
     font-size: 20px;
   }
   .timer__back {

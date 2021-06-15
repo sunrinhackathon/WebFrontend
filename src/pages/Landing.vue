@@ -1,58 +1,120 @@
 <template>
   <div class="home">
-    <ModalComponent v-if="showModal" @close="showModal = false"></ModalComponent>
+    <ModalComponent
+      v-if="showModal"
+      @close="showModal = false"
+    ></ModalComponent>
     <section class="home__banner">
       <div class="home__banner__images">
-        <img src="@/assets/images/developer.svg" class="home__banner__image__developer" />
-        <img class="home__banner__logo" src="@/assets/images/title.svg" alt="제7회 선린톤 로고 이미지" />
-        <img src="@/assets/images/designer.svg" class="home__banner__image__designer" />
+        <img
+          src="@/assets/images/developer.svg"
+          class="home__banner__image__developer"
+        />
+        <img
+          class="home__banner__logo"
+          src="@/assets/images/title.svg"
+          alt="제7회 선린톤 로고 이미지"
+        />
+        <img
+          src="@/assets/images/designer.svg"
+          class="home__banner__image__designer"
+        />
       </div>
       <p class="timer__back">Timer</p>
-      <img src="@/assets/images/timer.svg" alt="선린톤 타이머 이미지" class="home__banner__timer" />
+      <img
+        src="@/assets/images/timer.svg"
+        alt="선린톤 타이머 이미지"
+        class="home__banner__timer"
+      />
       <TimerComponent :timeArray="time"></TimerComponent>
-      <button class="home__banner__button" @click="showModal = true">예선 지원하러 가기</button>
+      <button class="home__banner__button" @click="showModal = true">
+        예선 지원하러 가기
+      </button>
     </section>
     <div class="home__banner__background">
       <div class="home__banner__bottom"></div>
     </div>
     <article class="home__notice">
       <TextComponent fontSize="34px" color="#102765">대회안내</TextComponent>
-      <LineComponent width="32px" height="2px" backgroundColor="#102765" margin="60px 0px"></LineComponent>
+      <LineComponent
+        width="32px"
+        height="2px"
+        backgroundColor="#102765"
+        margin="60px 0px"
+      ></LineComponent>
       <section>
-        <TextComponent fontSize="40px" mobileFontSize30>선린 해커톤?</TextComponent>
-        <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
+        <TextComponent fontSize="40px" mobileFontSize30
+          >선린 해커톤?</TextComponent
+        >
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+        >
           선린 해커톤은 제한 시간 안에 소프트웨어를 개발하는 대회입니다
           <br />정해진 주제에 맞춰 하루만에 앱이나 게임을 개발해보세요!
         </TextComponent>
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>예선 관련 안내</TextComponent>
-        <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >예선 관련 안내</TextComponent
+        >
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+        >
           예선 통과 인원 : 80명 (게임 앱 분야 10명 / 생활 앱 분야 10명)
-          <br />심사 기준 : 포트폴리오 기반 개인 역량, 팀 능력
-          <br />결과 발표 :
+          <br />심사 기준 : 포트폴리오 기반 개인 역량, 팀 능력 <br />결과 발표 :
           7/12 (월) 18:00
         </TextComponent>
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>본선 관련 안내</TextComponent>
-        <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >본선 관련 안내</TextComponent
+        >
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+        >
           개발 : 7/17(토) 8:00 ~ 7/18(일) 8:00
-          <br />발표 및 심사 : 7/18(일) 19:00
-          <br />결과 발표 : 당일 발표
+          <br />발표 및 심사 : 7/18(일) 19:00 <br />결과 발표 : 당일 발표
         </TextComponent>
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>주제 공개 방법</TextComponent>
-        <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >주제 공개 방법</TextComponent
+        >
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+        >
           • 일주일 전 대주제 공개, 공개된 주제 세분화하여 팀별 랜덤으로 선택
           <br />◦ EX) Color -> Red, Yellow, Green . . .
         </TextComponent>
       </section>
-      <LineComponent width="32px" height="2px" backgroundColor="#102765" margin="0px 0px 106px 0px"></LineComponent>
+      <LineComponent
+        width="32px"
+        height="2px"
+        backgroundColor="#102765"
+        margin="0px 0px 106px 0px"
+      ></LineComponent>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>온라인 진행</TextComponent>
-        <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >온라인 진행</TextComponent
+        >
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+        >
           이번 해커톤 역시 COVID-19로 인해 온라인으로 진행하게 되었습니다 :)
           <br />대회 진행 및 운영은 마찬가지로 Discord로 진행할 예정이니
           <br />신청자 분들께서는 디스코드 아이디를 미리 준비해주세요!
@@ -75,7 +137,8 @@
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >선린 해커톤 페이스북 페이지 ( @sunrinhackathon )</TextComponent>
+          >선린 해커톤 페이스북 페이지 ( @sunrinhackathon )</TextComponent
+        >
         <!-- 이미지 박스 -->
         <a href="http://facebook.com/sunrinhackathon">
           <img
@@ -85,35 +148,46 @@
             height="160px"
             style="width:100%; margin :0 auto"
           />
-          <TextComponent margin="-20px 0px 36px 0px">▲ 선린톤 페이스북 페이지</TextComponent>
+          <TextComponent margin="-20px 0px 36px 0px"
+            >▲ 선린톤 페이스북 페이지</TextComponent
+          >
         </a>
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>참가팀 발표</TextComponent>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >참가팀 발표</TextComponent
+        >
         <TextComponent
           fontSize="28px"
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >예선 이후 공지 예정입니다 :)</TextComponent>
+          >예선 이후 공지 예정입니다 :)</TextComponent
+        >
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30>대회 일정</TextComponent>
+        <TextComponent fontSize="36px" mobileFontSize30
+          >대회 일정</TextComponent
+        >
         <TextComponent
           fontSize="28px"
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >예선 이후 공지 예정입니다 :)</TextComponent>
+          >예선 이후 공지 예정입니다 :)</TextComponent
+        >
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30F>포인트 교환소</TextComponent>
+        <TextComponent fontSize="36px" mobileFontSize30F
+          >포인트 교환소</TextComponent
+        >
         <TextComponent
           fontSize="28px"
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >대회 시작 이후 공지 예정입니다 :)</TextComponent>
+          >대회 시작 이후 공지 예정입니다 :)</TextComponent
+        >
       </section>
     </article>
     <footer class="home__footer"></footer>
@@ -123,17 +197,17 @@
 <script>
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
-import moment from "moment";
+import moment, { duration } from "moment";
 import api from "@/assets/client";
 
 const settingTimer = async () => {
   return await api
     .post("/admin/time/start/hackathon", {
-      value: "Sat Jun 05 2021 21:09:17 GMT+0900 (Korean Standard Time)"
+      value: "Sat July 09 2021 11:59:00 GMT+0900 (Korean Standard Time)"
     })
     .then(res => {
-      console.log(res);
-      alert("test");
+      // console.log(res);
+      // alert("test");
     })
     .catch(e => {
       console.error(e);
@@ -170,10 +244,8 @@ export default {
   created() {
     // settingTimer();
     getTime().then(res => {
-      console.log(res);
       this.endTime = new moment(res);
       var seconds = Number((this.endTime - this.startTime) / 1000);
-
       setInterval(() => {
         var d = Math.floor(seconds / (3600 * 24));
         var h = Math.floor((seconds % (3600 * 24)) / 3600);
@@ -271,7 +343,7 @@ export default {
   border: 0px;
   box-shadow: #0613aa 10px 10px 3px;
   font-size: 25px;
-  /* margin-top: 80px; */
+  margin-top: 80px;
   background-color: white;
   cursor: pointer;
   z-index: 1;

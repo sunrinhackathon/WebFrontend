@@ -107,15 +107,17 @@ export default {
   methods: {
     setportfolios(event) {
       const file = event.target.files[0];
-      if (!file || file.size > 1024 * 1024 * 50) {
-        alert("파일은 50mb이하여야합니다");
+      if (!file || file.size > 1024 * 1024 * 100) {
+        alert("파일은 100mb이하여야합니다");
         return;
       }
       const reader = new FileReader();
       // console.log(file);
       reader.onload = event => {
         // console.log("성공", event.target.result);
+        console.log(file.name);
         this.portfolioMessage = file.name;
+        console.log(this.portfolioMessage);
       };
       reader.readAsDataURL(file);
       this.portfolio = file;
@@ -123,26 +125,54 @@ export default {
     },
 
     submitapplication: async function() {
-      this.formData.set("name", this.name);
-      this.formData.set("studentId", this.studentId);
-      this.formData.set("teamName", this.team);
-      this.formData.set("position", this.position);
-      this.formData.set("clothSize", this.clothSize);
-      this.formData.set("portfolio", this.portfolio);
-      this.formData.set("phoneNumber", this.phone);
+      if (
+        this.name != "" &&
+        this.studentId != "" &&
+        this.team != "" &&
+        this.position != "" &&
+        this.clothSize != "" &&
+        this.portfolio != "" &&
+        this.portfolioMessage != "파일 업로드"
+      ) {
+        this.formData.set("name", this.name);
+        this.formData.set("studentId", this.studentId);
+        this.formData.set("teamName", this.team);
+        this.formData.set("position", this.position);
+        this.formData.set("clothSize", this.clothSize);
+        this.formData.set("portfolio", this.portfolio);
+        this.formData.set("phoneNumber", this.phone);
 
-      // for (var pair of this.formData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1]);
-      // }
-      await api
-        .post("/apply", this.formData)
-        .then(res => {
-          console.log(res);
-        })
-        .catch(e => {
-          console.log(e);
-          throw e;
-        });
+        // for (var pair of this.formData.entries()) {
+        //   console.log(pair[0] + ", " + pair[1]);
+        // }
+        await api
+          .post("/apply", this.formData)
+          .then(res => {
+            if (res.data.result) {
+              alert("성공적으로 제출하였습니다.");
+              (this.name = ""),
+                (this.phone = ""),
+                (this.team = ""),
+                (this.studentId = ""),
+                (this.position = ""),
+                (this.clothSize = ""),
+                (this.portfolioMessage = "파일 업로드"),
+                (this.formData = new FormData());
+            } else {
+              alert(res.data.message);
+            }
+          })
+          .catch(e => {
+            if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
+              alert("빈칸을 모두 채워주세요.");
+            } else {
+              alert("ERROR");
+            }
+            throw e;
+          });
+      } else {
+        alert("빈칸을 모두 채워주세요.");
+      }
     }
   }
 };

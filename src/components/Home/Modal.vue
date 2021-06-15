@@ -1,7 +1,12 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <BeatLoader :loading="loading" :color="color" :size="size" class="loading"></BeatLoader>
+      <BeatLoader
+        :loading="loading"
+        :color="color"
+        :size="size"
+        class="loading"
+      ></BeatLoader>
 
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
@@ -83,14 +88,14 @@
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
-                <div class="modal-body-input">{{ protfolioMessage }}</div>
+                <div class="modal-body-input">{{ portfolioMessage }}</div>
               </label>
               <input
                 id="file"
                 style="display:none"
                 type="file"
                 accept="application/pdf"
-                @change="setprotfolio($event)"
+                @change="setportfolios($event)"
               />
             </div>
           </div>
@@ -249,6 +254,7 @@ export default {
                 (this.clothSize = ""),
                 (this.portfolioMessage = "파일 업로드"),
                 (this.formData = new FormData());
+              this.$emit("close");
             } else {
               alert(res.data.message);
             }
@@ -325,11 +331,7 @@ export default {
   overflow-y: auto;
   position: relative;
 }
-@media screen and (max-width: 768px) {
-  .modal-container {
-    overflow: hidden;
-  }
-}
+
 .modal-close {
   position: absolute;
   right: 20px;

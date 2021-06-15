@@ -112,7 +112,7 @@
         <TextComponent
           fontSize="28px"
           fontFamily="NanumSquareR"
-          margin="36px 0px"
+          margin="36px 15px"
           mobileFontSize20
         >
           이번 해커톤 역시 COVID-19로 인해 온라인으로 진행하게 되었습니다 :)
@@ -127,7 +127,9 @@
             height="150px"
             style="width:100%; margin :0 auto"
           />
-          <TextComponent margin="-20px 0px 36px 0px">▲ Discord 공식 홈페이지</TextComponent>
+          <TextComponent margin="-20px 0px 36px 0px"
+            >▲ Discord 공식 홈페이지</TextComponent
+          >
         </a>
       </section>
       <section>
@@ -240,7 +242,6 @@ export default {
       startTime: new moment()
     };
   },
-  methods: {},
   created() {
     // settingTimer();
     getTime().then(res => {
@@ -279,7 +280,8 @@ export default {
 <style scoped>
 .home__banner__images {
   width: 100%;
-  margin: 40px 0px 0px 0px;
+  margin: 80px 0px 0px 0px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -347,7 +349,7 @@ export default {
   background-color: white;
   cursor: pointer;
   z-index: 1;
-  margin: 50px auto 0px auto;
+  margin: 70px auto 0px auto;
 }
 .home__banner__bottom {
   height: 80px;
@@ -394,7 +396,6 @@ export default {
   .home__banner__button {
     width: 240px;
     height: 66px;
-    min-height: 66px;
     font-size: 20px;
   }
   .timer__back {

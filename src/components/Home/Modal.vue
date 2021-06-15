@@ -1,12 +1,7 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <BeatLoader
-        :loading="loading"
-        :color="color"
-        :size="size"
-        class="loading"
-      ></BeatLoader>
+      <BeatLoader :loading="loading" :color="color" :size="size" class="loading"></BeatLoader>
 
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
@@ -18,25 +13,18 @@
               mobileFontSize20
               fontSize="30px"
               margin="0px 0px 8px 0px"
-              >7th 선린 해커톤 예선 신청서</TextComponent
-            >
+            >7th 선린 해커톤 예선 신청서</TextComponent>
             <TextComponent
               mobileFontSize14
               fontSize="18px"
               fontFamily="NanumSquareR"
-              >7월 9일 23:59분까지 작성 부탁 드립니다 :)</TextComponent
-            >
+            >7월 9일 23:59분까지 작성 부탁 드립니다 :)</TextComponent>
           </div>
 
           <div class="modal-body">
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">이름</div>
-              <input
-                class="modal-body-input"
-                type="text"
-                placeholder="ex) 김선린"
-                v-model="name"
-              />
+              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name" />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">학번</div>
@@ -59,12 +47,7 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">팀 이름</div>
-              <input
-                class="modal-body-input"
-                type="text"
-                placeholder="ex) 선린톤화이팅"
-                v-model="team"
-              />
+              <input class="modal-body-input" type="text" placeholder="ex) 선린톤화이팅" v-model="team" />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">직책</div>
@@ -101,9 +84,7 @@
           </div>
 
           <div class="modal-footer">
-            <button class="modal-default-button" @click="submitapplication">
-              제출하기
-            </button>
+            <button class="modal-default-button" @click="submitapplication">제출하기</button>
           </div>
         </div>
       </div>
@@ -129,7 +110,7 @@ export default {
       clothSize: "L",
       portfolioMessage: "파일 업로드",
       formData: new FormData(),
-      color: "rgb(93, 197, 150)",
+      color: "#113fbd",
       size: "30px",
       loading: false
     };
@@ -207,15 +188,12 @@ export default {
         return;
       }
       const reader = new FileReader();
-      console.log(file);
       reader.onload = event => {
-        // console.log("성공", event.target.result);
         this.portfolioMessage = "";
         this.portfolioMessage = file.name;
       };
       reader.readAsDataURL(file);
       this.portfolio = file;
-      // console.log(this.portfolio);
     },
 
     submitapplication: async function() {
@@ -236,9 +214,6 @@ export default {
         this.formData.set("portfolio", this.portfolio);
         this.formData.set("phoneNumber", this.phone);
 
-        // for (var pair of this.formData.entries()) {
-        //   console.log(pair[0] + ", " + pair[1]);
-        // }
         this.loading = true;
         await api
           .post("/apply", this.formData)

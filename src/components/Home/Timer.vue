@@ -10,8 +10,7 @@
         fontSize="30px"
         :mobileFontSize="true"
         color="white"
-        >{{ data.timeName }}</TextComponent
-      >
+      >{{ data.timeName }}</TextComponent>
     </div>
   </div>
 </template>
@@ -34,6 +33,7 @@ export default {
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   display: flex;
   height: fit-content;
+  font-family: "NanumSquareEB";
 }
 .timer > * {
   margin: 0px 26px;

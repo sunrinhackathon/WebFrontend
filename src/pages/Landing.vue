@@ -122,7 +122,17 @@
         >대회 시작 이후 공지 예정입니다 :)</TextComponent>
       </section>
     </article>
-    <footer class="home__footer"></footer>
+    <footer class="home__footer">
+      <div>
+        Copyright © 2021 SUNRINTHON STAFF
+        <br />2021 SUNRINTHON WEB_STAFF (
+        <a href="https://github.com/UniTaeMin">염태민</a> /
+        <a href="https://github.com/hadmarine">이호준</a> /
+        <a href="https://github.com/famous0811">유명환</a> /
+        <a>김유라</a> )
+        <br />CONTACT | facebook.com/sunrinhackathon
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -315,6 +325,18 @@ export default {
   width: 100%;
   height: 160px;
   background-color: #113fbd;
+  color: white;
+  padding: 2% 3%;
+  font-size: 18px;
+  line-height: 1.4;
+  font-family: "NanumSquareB" !important;
+  display: flex;
+  align-items: center;
+}
+.home__footer a {
+  text-decoration: none !important;
+  cursor: pointer;
+  color: white;
 }
 
 .timer__back {
@@ -340,6 +362,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .home__footer {
+    font-size: 12px;
+  }
   .loading__timer {
     height: 84px;
   }

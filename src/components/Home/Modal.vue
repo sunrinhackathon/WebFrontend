@@ -214,35 +214,40 @@ export default {
         this.formData.set("portfolio", this.portfolio);
         this.formData.set("phoneNumber", this.phone);
 
-        this.loading = true;
-        await api
-          .post("/apply", this.formData)
-          .then(res => {
-            this.loading = false;
-            if (res.data.result) {
-              alert("성공적으로 제출하였습니다.");
-              (this.name = ""),
-                (this.phone = ""),
-                (this.team = ""),
-                (this.studentId = ""),
-                (this.position = ""),
-                (this.clothSize = ""),
-                (this.portfolioMessage = "파일 업로드"),
-                (this.formData = new FormData());
-              this.$emit("close");
-            } else {
-              alert(res.data.message);
-            }
-          })
-          .catch(e => {
-            this.loading = false;
-            if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
-              alert("빈칸을 모두 채워주세요.");
-            } else {
-              alert("ERROR");
-            }
-            throw e;
-          });
+        var regexp = /^[0-9]*$/;
+        if (!regexp.test(this.studentId)) {
+          alert("학번에 숫자만 입력하세요");
+        } else {
+          this.loading = true;
+          await api
+            .post("/apply", this.formData)
+            .then(res => {
+              this.loading = false;
+              if (res.data.result) {
+                alert("성공적으로 제출하였습니다.");
+                (this.name = ""),
+                  (this.phone = ""),
+                  (this.team = ""),
+                  (this.studentId = ""),
+                  (this.position = ""),
+                  (this.clothSize = ""),
+                  (this.portfolioMessage = "파일 업로드"),
+                  (this.formData = new FormData());
+                this.$emit("close");
+              } else {
+                alert(res.data.message);
+              }
+            })
+            .catch(e => {
+              this.loading = false;
+              if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
+                alert("빈칸을 모두 채워주세요.");
+              } else {
+                alert("ERROR");
+              }
+              throw e;
+            });
+        }
       } else {
         alert("빈칸을 모두 채워주세요.");
       }

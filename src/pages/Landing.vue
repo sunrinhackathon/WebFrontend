@@ -31,7 +31,7 @@
       <section>
         <TextComponent fontSize="36px" mobileFontSize30>예선 관련 안내</TextComponent>
         <TextComponent fontSize="28px" fontFamily="NanumSquareR" margin="36px 0px" mobileFontSize20>
-          예선 통과 인원 : 80명 (게임 앱 분야 10명 / 생활 앱 분야 10명)
+          예선 통과 인원 : 80명 (게임 앱 분야 10팀 / 생활 앱 분야 10팀)
           <br />심사 기준 : 포트폴리오 기반 개인 역량, 팀 능력
           <br />결과 발표 :
           7/12 (월) 18:00

@@ -7,8 +7,10 @@
         <img class="home__banner__logo" src="@/assets/images/title.svg" alt="제7회 선린톤 로고 이미지" />
         <img src="@/assets/images/designer.svg" class="home__banner__image__designer" />
       </div>
+      <div style="margin-top:-50px;"></div>
       <p class="timer__back">Timer</p>
       <img src="@/assets/images/timer.svg" alt="선린톤 타이머 이미지" class="home__banner__timer" />
+
       <TimerComponent :timeArray="time" v-if="loading == false"></TimerComponent>
       <BeatLoader :loading="loading" :color="color" :size="size" v-else class="loading__timer"></BeatLoader>
       <button class="home__banner__button" @click="showModal = true">예선 지원하러 가기</button>
@@ -274,7 +276,7 @@ export default {
   width: 25%;
 
   transform: rotate(-16deg);
-  top: -20%;
+  top: -30%;
   left: 7%;
 }
 .home__banner__image__designer {
@@ -283,7 +285,7 @@ export default {
   width: 22%;
 
   transform: rotate(5deg);
-  bottom: -34%;
+  bottom: -40%;
   right: 4%;
 }
 .home__banner__button {

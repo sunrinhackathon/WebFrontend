@@ -33,7 +33,8 @@ export default {
   text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
   display: flex;
   height: fit-content;
-  font-family: "NanumSquareEB";
+  font-family: "Bangers", cursive;
+  font-weight: 100;
 }
 .timer > * {
   margin: 0px 26px;

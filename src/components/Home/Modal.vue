@@ -19,6 +19,11 @@
               fontSize="18px"
               fontFamily="NanumSquareR"
             >7월 9일 23:59분까지 작성 부탁 드립니다 :)</TextComponent>
+            <TextComponent
+              mobileFontSize14
+              fontSize="18px"
+              fontFamily="NanumSquareR"
+            >팀당 제출이 아닌 개인별 제출입니다.</TextComponent>
           </div>
 
           <div class="modal-body">

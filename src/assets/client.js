@@ -11,5 +11,8 @@ function apiUri() {
 
   return apiUriPreference[process.env.VUE_APP_PROD_ENV || "development"];
 }
+const api = axios.create({
+  baseURL: apiUri()
+});
 
-export default apiUri();
+export default api;

@@ -52,7 +52,6 @@
 }
 * {
   box-sizing: border-box;
-  font-family: "NanumSquareEB";
 }
 body {
   margin: 0 auto;

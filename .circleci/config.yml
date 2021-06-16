@@ -46,7 +46,7 @@ jobs:
           command: npm install
       - run:
           name: Env settings
-          command: echo \VUE_APP_PROD_ENV=production >> .env
+          command: printf "\nVUE_APP_PROD_ENV=production" >> .env
       - save_cache:
           paths:
             - node_modules

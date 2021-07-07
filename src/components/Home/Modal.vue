@@ -188,8 +188,8 @@ export default {
     },
     setportfolios(event) {
       const file = event.target.files[0];
-      if (!file || file.size > 1024 * 1024 * 100) {
-        alert("파일은 100mb이하여야합니다");
+      if (!file || file.size > 1024 * 1024 * 500) {
+        alert("파일은 500MB이하여야합니다");
         return;
       }
       const reader = new FileReader();

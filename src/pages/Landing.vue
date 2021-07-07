@@ -143,7 +143,7 @@ import BeatLoader from "vue-spinner/src/BeatLoader.vue";
 import TimerComponent from "@/components/Home/Timer";
 import ModalComponent from "@/components/Home/Modal";
 import moment, { duration } from "moment";
-import api from "@/assets/client";
+import api from "@/api/client";
 
 const settingTimer = async () => {
   return await api

@@ -100,7 +100,7 @@
 <script>
 // import RingLoader from "vue-spinner/src/RingLoader.vue";
 import BeatLoader from "vue-spinner/src/BeatLoader.vue";
-import api from "@/assets/client";
+import api from "@/api/client";
 export default {
   components: {
     BeatLoader

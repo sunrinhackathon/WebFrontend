@@ -128,8 +128,8 @@
       <div>
         Copyright © 2021 SUNRINTHON STAFF
         <br />2021 SUNRINTHON WEB_STAFF (
-        <a href="https://github.com/UniTaeMin">염태민</a> /
         <a href="https://github.com/hadmarine">이호준</a> /
+        <a href="https://github.com/UniTaeMin">염태민</a> /
         <a href="https://github.com/famous0811">유명환</a> /
         <a>김유라</a> )
         <br />CONTACT | facebook.com/sunrinhackathon
@@ -199,7 +199,7 @@ export default {
           var h = Math.floor((seconds % (3600 * 24)) / 3600);
           var m = Math.floor((seconds % 3600) / 60);
           var s = Math.floor(seconds % 60);
-          this.time = [
+          this.time =seconds <= 0 ? [{timeName:"", data: "Time Expired!"}]: [
             {
               timeName: "days",
               data: d < 10 ? "0" + d : d

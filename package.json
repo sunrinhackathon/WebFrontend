@@ -10,7 +10,7 @@
     "aos": "^3.0.0-beta.6",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "eqb-request-client": "^0.2.0",
+    "eqb-request-client": "^0.5.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "vue": "^2.6.11",

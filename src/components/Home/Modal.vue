@@ -78,6 +78,13 @@
                 <option value="3XL">3XL</option>
               </select>
             </div>
+              <div class="modal-body-input-box">
+              <div class="modal-body-input-title">분야</div>
+              <select class="modal-body-input" v-model="field">
+                <option value="게임">게임</option>
+                <option value="생활">생활</option>
+              </select>
+            </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">포트폴리오</div>
               <label for="file">
@@ -122,7 +129,8 @@ export default {
       formData: new FormData(),
       color: "#113fbd",
       size: "30px",
-      loading: false
+      loading: false,
+      field:"게임"
     };
   },
   methods: {
@@ -214,7 +222,8 @@ export default {
         this.position != "" &&
         this.clothSize != "" &&
         this.portfolio != "" &&
-        this.portfolioMessage != "파일 업로드"
+        this.portfolioMessage != "파일 업로드" &&
+        this.field != ""
       ) {
         this.formData.set("name", this.name);
         this.formData.set("studentId", this.studentId);
@@ -223,6 +232,7 @@ export default {
         this.formData.set("clothSize", this.clothSize);
         this.formData.set("portfolio", this.portfolio);
         this.formData.set("phoneNumber", this.phone);
+        this.formData.set("field", this.field);
 
         var regexp = /^[0-9]*$/;
         if (!regexp.test(this.studentId)) {
@@ -242,7 +252,8 @@ export default {
                   (this.position = ""),
                   (this.clothSize = ""),
                   (this.portfolioMessage = "파일 업로드"),
-                  (this.formData = new FormData());
+                  (this.formData = new FormData())
+                  this.field= "게임";
                 this.$emit("close");
               } else {
                 alert(res.data.message);

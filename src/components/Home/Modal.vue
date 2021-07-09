@@ -25,8 +25,7 @@
               fontFamily="NanumSquareR"
             >팀당 제출이 아닌 개인별 제출입니다.</TextComponent>
             <TextComponent mobileFontSize14 fontSize="18px" fontFamily="NanumSquareR">
-              팀은 4인으로 구성되어야 하며, 미달 시 참가할 수
-              없습니다.
+              팀은 4인으로 구성되어야 하며, 미달 시 실격됩니다.
             </TextComponent>
           </div>
 
@@ -89,6 +88,7 @@
               <label for="file">
                 <div class="modal-body-input">{{ portfolioMessage }}</div>
               </label>
+            
               <input
                 id="file"
                 style="display: none"
@@ -124,7 +124,7 @@ export default {
       studentId: "",
       position: "팀장",
       clothSize: "L",
-      portfolioMessage: "파일 업로드",
+      portfolioMessage: "파일 업로드 (PDF 만 지원)",
       formData: new FormData(),
       color: "#113fbd",
       size: "30px",

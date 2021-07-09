@@ -24,11 +24,10 @@
               fontSize="18px"
               fontFamily="NanumSquareR"
             >팀당 제출이 아닌 개인별 제출입니다.</TextComponent>
-            <TextComponent
-              mobileFontSize14
-              fontSize="18px"
-              fontFamily="NanumSquareR"
-            >팀은 4인으로 구성되어야 하며, 미달 시 참가할 수 없습니다.</TextComponent>
+            <TextComponent mobileFontSize14 fontSize="18px" fontFamily="NanumSquareR">
+              팀은 4인으로 구성되어야 하며, 미달 시 참가할 수
+              없습니다.
+            </TextComponent>
           </div>
 
           <div class="modal-body">
@@ -78,7 +77,7 @@
                 <option value="3XL">3XL</option>
               </select>
             </div>
-              <div class="modal-body-input-box">
+            <div class="modal-body-input-box">
               <div class="modal-body-input-title">분야</div>
               <select class="modal-body-input" v-model="field">
                 <option value="게임">게임</option>
@@ -92,7 +91,7 @@
               </label>
               <input
                 id="file"
-                style="display:none"
+                style="display: none"
                 type="file"
                 accept="application/pdf"
                 @change="setportfolios($event)"
@@ -130,7 +129,7 @@ export default {
       color: "#113fbd",
       size: "30px",
       loading: false,
-      field:"게임"
+      field: "게임"
     };
   },
   methods: {
@@ -252,8 +251,8 @@ export default {
                   (this.position = ""),
                   (this.clothSize = ""),
                   (this.portfolioMessage = "파일 업로드"),
-                  (this.formData = new FormData())
-                  this.field= "게임";
+                  (this.formData = new FormData());
+                this.field = "게임";
                 this.$emit("close");
               } else {
                 alert(res.data.message);
@@ -263,6 +262,10 @@ export default {
               this.loading = false;
               if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
                 alert("빈칸을 모두 채워주세요.");
+              } else if (e.response?.data.code == "TIME_EXPIRED") {
+                alert("신청이 종료되었습니다.");
+              } else if (e.response?.data.code == "PARAMETER_INVALID") {
+                alert("포폴 파일 형식이 잘못 되었습니다.");
               } else {
                 alert("ERROR");
               }

@@ -1,7 +1,12 @@
 <template>
   <transition name="modal">
     <div class="modal-mask">
-      <BeatLoader :loading="loading" :color="color" :size="size" class="loading"></BeatLoader>
+      <BeatLoader
+        :loading="loading"
+        :color="color"
+        :size="size"
+        class="loading"
+      ></BeatLoader>
 
       <div class="modal-wrapper" @click.self="$emit('close')">
         <div class="modal-container">
@@ -13,28 +18,38 @@
               mobileFontSize20
               fontSize="30px"
               margin="0px 0px 8px 0px"
-            >7th 선린 해커톤 예선 신청서</TextComponent>
+              >7th 선린 해커톤 예선 신청서</TextComponent
+            >
             <TextComponent
               mobileFontSize14
               fontSize="18px"
               fontFamily="NanumSquareR"
-            >7월 9일 23:59분까지 작성 부탁 드립니다</TextComponent>
+              >7월 9일 23:59분까지 작성 부탁 드립니다</TextComponent
+            >
             <TextComponent
               mobileFontSize14
               fontSize="18px"
               fontFamily="NanumSquareR"
-            >팀당 제출이 아닌 개인별 제출입니다.</TextComponent>
+              >팀당 제출이 아닌 개인별 제출입니다.</TextComponent
+            >
             <TextComponent
               mobileFontSize14
               fontSize="18px"
               fontFamily="NanumSquareR"
-            >팀은 4인으로 구성되어야 하며, 미달 시 참가할 수 없습니다.</TextComponent>
+              >팀은 4인으로 구성되어야 하며, 미달 시 참가할 수
+              없습니다.</TextComponent
+            >
           </div>
 
           <div class="modal-body">
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 김선린" v-model="name" />
+              <input
+                class="modal-body-input"
+                type="text"
+                placeholder="ex) 김선린"
+                v-model="name"
+              />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">학번</div>
@@ -57,7 +72,12 @@
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">팀 이름</div>
-              <input class="modal-body-input" type="text" placeholder="ex) 선린톤화이팅" v-model="team" />
+              <input
+                class="modal-body-input"
+                type="text"
+                placeholder="ex) 선린톤화이팅"
+                v-model="team"
+              />
             </div>
             <div class="modal-body-input-box">
               <div class="modal-body-input-title">직책</div>
@@ -78,7 +98,7 @@
                 <option value="3XL">3XL</option>
               </select>
             </div>
-              <div class="modal-body-input-box">
+            <div class="modal-body-input-box">
               <div class="modal-body-input-title">분야</div>
               <select class="modal-body-input" v-model="field">
                 <option value="게임">게임</option>
@@ -92,7 +112,7 @@
               </label>
               <input
                 id="file"
-                style="display:none"
+                style="display: none"
                 type="file"
                 accept="application/pdf"
                 @change="setportfolios($event)"
@@ -101,7 +121,9 @@
           </div>
 
           <div class="modal-footer">
-            <button class="modal-default-button" @click="submitapplication">제출하기</button>
+            <button class="modal-default-button" @click="submitapplication">
+              제출하기
+            </button>
           </div>
         </div>
       </div>
@@ -130,7 +152,7 @@ export default {
       color: "#113fbd",
       size: "30px",
       loading: false,
-      field:"게임"
+      field: "게임"
     };
   },
   methods: {
@@ -214,7 +236,7 @@ export default {
       this.portfolio = file;
     },
 
-    submitapplication: async function() {
+    submitapplication: async function () {
       if (
         this.name != "" &&
         this.studentId != "" &&
@@ -252,8 +274,8 @@ export default {
                   (this.position = ""),
                   (this.clothSize = ""),
                   (this.portfolioMessage = "파일 업로드"),
-                  (this.formData = new FormData())
-                  this.field= "게임";
+                  (this.formData = new FormData());
+                this.field = "게임";
                 this.$emit("close");
               } else {
                 alert(res.data.message);
@@ -263,6 +285,10 @@ export default {
               this.loading = false;
               if (e.response?.data.code == "PARAMETER_NOT_PROVIDED") {
                 alert("빈칸을 모두 채워주세요.");
+              } else if (e.response?.data.code == "TIME_EXPIRED") {
+                alert("재출 시간을 초과하였습니다.");
+              } else if (e.response?.data.code == "PARAMETER_INVALID") {
+                alert("포폴 파일 형식이 잘못 되었습니다.");
               } else {
                 alert("ERROR");
               }

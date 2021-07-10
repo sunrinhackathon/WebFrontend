@@ -207,14 +207,30 @@ export default {
       color: "#ffffff",
       size: "20px",
       passedTeams: {
-        life: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
-        game: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+        life: [],
+        game: []
       },
       showTeams: false
     };
   },
   created() {
     this.loading = true;
+    this.showTeams = false;
+    api
+      .get("/teams/passed")
+      .then(res => {
+        if (res.data) {
+          this.passedTeams.life = res.data.data.living;
+          this.passedTeams.game = res.data.data.game;
+          this.showTeams = true;
+        }
+      })
+      .catch(e => {
+        if (e.response?.data.code == "DATA_NULL") {
+          //데이터 없음
+        }
+      });
+
     getTime()
       .then(res => {
         this.endTime = new moment(res);

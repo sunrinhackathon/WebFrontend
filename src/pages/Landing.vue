@@ -34,7 +34,7 @@
           예선 통과 인원 : 80명 (게임 앱 분야 10팀 / 생활 앱 분야 10팀)
           <br />심사 기준 : 포트폴리오 기반 개인 역량, 팀 능력
           <br />결과 발표 :
-          7/12 (월) 18:00
+          7/11 (일) 18:00
         </TextComponent>
       </section>
       <section>
@@ -103,7 +103,28 @@
           fontFamily="NanumSquareR"
           margin="36px 0px"
           mobileFontSize20
-        >예선 이후 공지 예정입니다 :)</TextComponent>
+          v-if="!showTeams"
+        >신청서 심사 중 입니다.</TextComponent>
+        <template v-else>
+          <div class="group">
+            <div class="life list">
+              <span class="title">생활</span>
+              <span
+                v-for="(value, index) in passedTeams.life"
+                :key="`${index}_${value}`"
+                class="team"
+              >{{ value }}</span>
+            </div>
+            <div class="game list">
+              <span class="title">게임</span>
+              <span
+                v-for="(value, index) in passedTeams.game"
+                :key="`${index}_${value}`"
+                class="team"
+              >{{ value }}</span>
+            </div>
+          </div>
+        </template>
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30>대회 일정</TextComponent>
@@ -184,7 +205,12 @@ export default {
       startTime: new moment(),
       loading: false,
       color: "#ffffff",
-      size: "20px"
+      size: "20px",
+      passedTeams: {
+        life: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+        game: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
+      },
+      showTeams: false
     };
   },
   created() {
@@ -199,24 +225,27 @@ export default {
           var h = Math.floor((seconds % (3600 * 24)) / 3600);
           var m = Math.floor((seconds % 3600) / 60);
           var s = Math.floor(seconds % 60);
-          this.time =seconds <= 0 ? [{timeName:"", data: "Time Expired!"}]: [
-            {
-              timeName: "days",
-              data: d < 10 ? "0" + d : d
-            },
-            {
-              timeName: "hours",
-              data: h < 10 ? "0" + h : h
-            },
-            {
-              timeName: "min",
-              data: m < 10 ? "0" + m : m
-            },
-            {
-              timeName: "sec",
-              data: s < 10 ? "0" + s : s
-            }
-          ];
+          this.time =
+            seconds <= 0
+              ? [{ timeName: "", data: "Time Expired!" }]
+              : [
+                  {
+                    timeName: "days",
+                    data: d < 10 ? "0" + d : d
+                  },
+                  {
+                    timeName: "hours",
+                    data: h < 10 ? "0" + h : h
+                  },
+                  {
+                    timeName: "min",
+                    data: m < 10 ? "0" + m : m
+                  },
+                  {
+                    timeName: "sec",
+                    data: s < 10 ? "0" + s : s
+                  }
+                ];
           if (check_seconds == seconds) {
             this.loading = false;
           }
@@ -231,6 +260,52 @@ export default {
 </script>
 
 <style scoped>
+.group {
+  width: 480px;
+  max-width: 80vw;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+  font-size: 26px;
+}
+.list {
+  max-width: 200px;
+  min-width: 180px;
+  height: 100%;
+  margin: 0 20px 30px 20px;
+}
+.life,
+.game {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #cccccc;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid #cccccc;
+  color: white;
+  background-color: #001da3;
+}
+.team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+  border-bottom: 1px solid #cccccc;
+  color: #444444;
+  font-size: 22px;
+}
+.desc:first-child:last-child {
+  text-align: center;
+}
 .home__banner__images {
   width: 100%;
   margin: 80px 0px 0px 0px;

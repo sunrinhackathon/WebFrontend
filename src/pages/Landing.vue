@@ -283,7 +283,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 36px;
   font-size: 26px;
 }
@@ -292,6 +292,7 @@ export default {
   min-width: 180px;
   height: 100%;
   margin: 0 20px 30px 20px;
+  font-family: "NanumSquareB" !important;
 }
 .life,
 .game {

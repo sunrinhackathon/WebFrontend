@@ -3372,10 +3372,10 @@ entities@^2.0.0:
   resolved "https://registry.npmjs.org/entities/-/entities-2.2.0.tgz"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-eqb-request-client@0.7.0-rc1:
-  version "0.7.0-rc1"
-  resolved "https://registry.yarnpkg.com/eqb-request-client/-/eqb-request-client-0.7.0-rc1.tgz#4e5fac65ea2f238fd6727fbe4271a72861a5cf57"
-  integrity sha512-8CL9pOWbNZ4GghqR9Tw+DGa6MJFUUsT6jaopD+d5DlovMroN1HeFC6CFLbd4tH+d9ruU0l9lLHXwGPXnF2y35Q==
+eqb-request-client@0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/eqb-request-client/-/eqb-request-client-0.7.0.tgz#fbb17748817189715dc6dda5dd3ef7f9da8197b4"
+  integrity sha512-m0TWbRASO1e6I4eDOFSC2UZuuXPmkg58OKtxDljTQ79tbiibAuwCMljmfNiZA5UZEToMaaVyxiwbSH/vUV7Svg==
   dependencies:
     axios "^0.21.1"
 

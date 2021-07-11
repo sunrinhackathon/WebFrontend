@@ -34,7 +34,7 @@
           예선 통과 인원 : 80명 (게임 앱 분야 10팀 / 생활 앱 분야 10팀)
           <br />심사 기준 : 포트폴리오 기반 개인 역량, 팀 능력
           <br />결과 발표 :
-          7/11 (일) 18:00
+          7/11 (일) 20:00
         </TextComponent>
       </section>
       <section>
@@ -277,7 +277,7 @@ export default {
 
 <style scoped>
 .group {
-  width: 480px;
+  width: 560px;
   max-width: 80vw;
   height: 100%;
   display: flex;
@@ -288,8 +288,8 @@ export default {
   font-size: 26px;
 }
 .list {
-  max-width: 200px;
-  min-width: 180px;
+  max-width: 240px;
+  min-width: 240px;
   height: 100%;
   margin: 0 20px 30px 20px;
   font-family: "NanumSquareB" !important;
@@ -300,6 +300,7 @@ export default {
   height: 100%;
   border: 1px solid #cccccc;
 }
+
 .title {
   display: flex;
   justify-content: center;
@@ -318,7 +319,7 @@ export default {
   height: 36px;
   border-bottom: 1px solid #cccccc;
   color: #444444;
-  font-size: 22px;
+  font-size: 18px;
 }
 .desc:first-child:last-child {
   text-align: center;

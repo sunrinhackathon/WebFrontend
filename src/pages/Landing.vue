@@ -13,7 +13,7 @@
 
       <TimerComponent :timeArray="time" v-if="loading == false"></TimerComponent>
       <BeatLoader :loading="loading" :color="color" :size="size" v-else class="loading__timer"></BeatLoader>
-      <button class="home__banner__button" @click="showModal = true">예선 지원하러 가기</button>
+      <a class="home__banner__button" href="#result">예선 결과 확인하기</a>
     </section>
     <div class="home__banner__background">
       <div class="home__banner__bottom"></div>
@@ -96,7 +96,7 @@
           <TextComponent margin="-20px 0px 36px 0px">▲ 선린톤 페이스북 페이지</TextComponent>
         </a>
       </section>
-      <section>
+      <section id="result">
         <TextComponent fontSize="36px" mobileFontSize30>참가팀 발표</TextComponent>
         <TextComponent
           fontSize="28px"
@@ -394,6 +394,9 @@ export default {
   cursor: pointer;
   z-index: 1;
   margin: 70px auto 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .home__banner__bottom {
   height: 80px;

@@ -219,7 +219,7 @@ export default {
     api
       .get("/teams/passed")
       .then(res => {
-        if (res.data) {
+        if (res.data.code == "OK") {
           this.passedTeams.life = res.data.data.living;
           this.passedTeams.game = res.data.data.game;
           this.showTeams = true;

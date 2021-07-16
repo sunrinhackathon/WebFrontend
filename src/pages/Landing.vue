@@ -128,12 +128,8 @@
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30>대회 일정</TextComponent>
-        <TextComponent
-          fontSize="28px"
-          fontFamily="NanumSquareR"
-          margin="36px 0px"
-          mobileFontSize20
-        >예선 이후 공지 예정입니다 :)</TextComponent>
+        <!-- 정시파이터 고3이 힘들어하고 있습니다. 양해 부탁드립니다. -->
+        <img :src="imgUrl" alt="대회 일정" class="schedule" />
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30F>포인트 교환소</TextComponent>
@@ -166,22 +162,9 @@ import ModalComponent from "@/components/Home/Modal";
 import moment, { duration } from "moment";
 import api from "@/api/client";
 
-const settingTimer = async () => {
-  return await api
-    .post("/admin/time/start/hackathon", {
-      value: "Sat July 09 2021 11:59:00 GMT+0900 (Korean Standard Time)"
-    })
-    .then(res => {
-      // alert("test");
-    })
-    .catch(e => {
-      console.error(e);
-      throw e;
-    });
-};
 const getTime = async () => {
   return await api
-    .get("/time/start/hackathon")
+    .get("/time/current")
     .then(res => {
       if (res.status === 500) {
         alert(res.message);
@@ -210,7 +193,8 @@ export default {
         life: [],
         game: []
       },
-      showTeams: false
+      showTeams: false,
+      imgUrl: ""
     };
   },
   created() {
@@ -223,6 +207,18 @@ export default {
           this.passedTeams.life = res.data.data.living;
           this.passedTeams.game = res.data.data.game;
           this.showTeams = true;
+        }
+      })
+      .catch(e => {
+        if (e.response?.data.code == "DATA_NULL") {
+          //데이터 없음
+        }
+      });
+    api
+      .get("/schedule")
+      .then(res => {
+        if (res.data.code == "OK") {
+          this.imgUrl = res.data.data;
         }
       })
       .catch(e => {
@@ -276,6 +272,11 @@ export default {
 </script>
 
 <style scoped>
+.schedule {
+  margin: 30px auto 0px auto;
+  width: 400px;
+}
+
 .group {
   width: 560px;
   max-width: 80vw;
@@ -460,6 +461,9 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .schedule {
+    width: 80vw !important;
+  }
   .home__footer {
     font-size: 12px;
   }

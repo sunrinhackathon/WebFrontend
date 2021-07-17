@@ -139,13 +139,21 @@
         >공개 예정입니다.</TextComponent>
       </section>
       <section>
-        <TextComponent fontSize="36px" mobileFontSize30F>포인트 교환소</TextComponent>
-        <TextComponent
-          fontSize="28px"
-          fontFamily="NanumSquareR"
-          margin="36px 0px"
-          mobileFontSize20
-        >대회 시작 이후 공지 예정입니다 :)</TextComponent>
+        <TextComponent fontSize="36px" mobileFontSize30 margin="0px 0px 30px 0px">포인트 교환소</TextComponent>
+        <div style="min-width: 240px">
+          <div
+            v-for="(value, index) in pointshop"
+            :key="`${index}_${value}`"
+            class="group__point"
+            :style="( pointshop.length == index+1)?'  border-bottom:1px solid #001da3 ':''"
+          >
+            <div class="group__border">
+              <div class="group__boxs">{{ value.product }}</div>
+              <div class="group__boxs">Price : {{value.price}}</div>
+            </div>
+            <div class="group__boxs">{{value.description}}</div>
+          </div>
+        </div>
       </section>
     </article>
     <footer class="home__footer">
@@ -201,7 +209,8 @@ export default {
         game: []
       },
       showTeams: false,
-      imgUrl: ""
+      imgUrl: "",
+      pointshop: []
     };
   },
   created() {
@@ -226,6 +235,18 @@ export default {
       .then(res => {
         if (res.data.code == "OK") {
           this.imgUrl = res.data.data;
+        }
+      })
+      .catch(e => {
+        if (e.response?.data.code == "DATA_NULL") {
+          //데이터 없음
+        }
+      });
+    api
+      .get("/pointshop")
+      .then(res => {
+        if (res.data.code == "OK") {
+          this.pointshop = res.data.data;
         }
       })
       .catch(e => {
@@ -279,6 +300,25 @@ export default {
 </script>
 
 <style scoped>
+.group__boxs {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+}
+.group__border {
+  min-width: 140px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.group__point {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #001da3;
+  padding: 6px 0px;
+}
 .schedule {
   margin: 30px auto 0px auto;
   width: 70vw;

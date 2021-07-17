@@ -130,6 +130,13 @@
         <TextComponent fontSize="36px" mobileFontSize30>대회 일정</TextComponent>
         <!-- 정시파이터 고3이 힘들어하고 있습니다. 양해 부탁드립니다. -->
         <img :src="imgUrl" alt="대회 일정" class="schedule" />
+        <TextComponent
+          fontSize="28px"
+          fontFamily="NanumSquareR"
+          margin="36px 0px"
+          mobileFontSize20
+          v-if="!imgUrl"
+        >공개 예정입니다.</TextComponent>
       </section>
       <section>
         <TextComponent fontSize="36px" mobileFontSize30F>포인트 교환소</TextComponent>
@@ -274,7 +281,7 @@ export default {
 <style scoped>
 .schedule {
   margin: 30px auto 0px auto;
-  width: 400px;
+  width: 70vw;
 }
 
 .group {

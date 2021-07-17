@@ -487,7 +487,7 @@ export default {
 
 .timer__back {
   color: white;
-  font-family: "KoolBeans";
+  font-family: "KoolBeans", "NanumSquareB", "sans-serif";
   font-size: 58px;
   text-shadow: 2px 2px black;
 }

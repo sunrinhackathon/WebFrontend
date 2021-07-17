@@ -52,6 +52,7 @@
 }
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0 auto;

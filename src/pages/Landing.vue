@@ -8,9 +8,7 @@
         <img src="@/assets/images/designer.svg" class="home__banner__image__designer" />
       </div>
       <div style="margin-top:-50px;"></div>
-      <p class="timer__back">Timer</p>
-      <img src="@/assets/images/timer.svg" alt="선린톤 타이머 이미지" class="home__banner__timer" />
-
+      <p class="timer__back">{{timerLabel}}</p>
       <TimerComponent :timeArray="time" v-if="loading == false"></TimerComponent>
       <BeatLoader :loading="loading" :color="color" :size="size" v-else class="loading__timer"></BeatLoader>
       <a class="home__banner__button" href="#result">예선 결과 확인하기</a>
@@ -210,7 +208,8 @@ export default {
       },
       showTeams: false,
       imgUrl: "",
-      pointshop: []
+      pointshop: [],
+      timerLabel: ""
     };
   },
   created() {
@@ -257,7 +256,8 @@ export default {
 
     getTime()
       .then(res => {
-        this.endTime = new moment(res);
+        this.timerLabel = res.label;
+        this.endTime = new moment(res.value);
         var seconds = Number((this.endTime - this.startTime) / 1000);
         var check_seconds = seconds;
         setInterval(() => {
@@ -486,11 +486,10 @@ export default {
 }
 
 .timer__back {
-  color: transparent;
+  color: white;
   font-family: "KoolBeans";
   font-size: 58px;
-  text-shadow: 1px 1px #001da3;
-  margin: 5.8px 0px;
+  text-shadow: 2px 2px black;
 }
 
 .loading__timer {
